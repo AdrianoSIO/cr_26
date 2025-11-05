@@ -3,8 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
 
-Route::view('/', 'welcome');
-
 // Menu principal
 Route::get('/accueil', [PageController::class, 'accueil'])->name('accueil');
 

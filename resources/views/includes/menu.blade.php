@@ -108,14 +108,6 @@
 </li>
 
 <li class="navigation-item">
-  <select name="admin" aria-label="Admin" onchange="if (this.value) window.location.href=this.value;">
-    <option selected disabled value="">Admin </option>
-    <option value="{{ route('edition') }}">Édition</option>
-    <option value="{{ route('gestionnaire') }}">Gestionnaire</option>
-  </select>
-</li>
-
-<li class="navigation-item">
   <button class="contrast">
     <a href="{{ route('utilisateurs') }}">Utilisateurs</a>
   </button>
