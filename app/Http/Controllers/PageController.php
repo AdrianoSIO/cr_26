@@ -18,7 +18,7 @@ class PageController extends Controller
     // --- Classement ---
     public function eleves(): View
     {
-        return view('eleves');
+        return view('eleve');
     }
 
     public function equipe(): View
@@ -88,5 +88,17 @@ class PageController extends Controller
     public function resultatModification(): View
     {
         return view('resultat.modification');
+    }
+    public function resultatImportation(): View
+    {
+        return view('resultat.importation');
+    }
+    public function classement(): View
+    {
+        return view('classement');
+    }
+    public function abonnement(): View
+    {
+        return view('abonnement');
     }
 }

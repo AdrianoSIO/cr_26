@@ -1,7 +1,6 @@
 @extends('includes.default')
 
 @section('contenu')
-<title>Gestion des Pays</title>
-<h1>Gestion des pays</h1>
-
+<h1>Abonnement</h1>
+<p>Page des abonnement</p>
 @endsection

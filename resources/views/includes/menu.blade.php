@@ -94,22 +94,9 @@
     <option value="{{ route('equipe') }}">Équipe</option>
   </select>
 </li>
-
 <li class="navigation-item">
   <button class="secondary">
-    <a href="{{ route('genre') }}">Genres</a>
-  </button>
-</li>
-
-<li class="navigation-item">
-  <button class="contrast">
-    <a href="{{ route('pays') }}">Pays</a>
-  </button>
-</li>
-
-<li class="navigation-item">
-  <button class="secondary">
-    <a href="{{ route('epreuve') }}">Épreuves</a>
+    <a href="{{ route('classement') }}">Classement</a>
   </button>
 </li>
 <li class="navigation-item">
@@ -124,7 +111,6 @@
   <select name="admin" aria-label="Admin" onchange="if (this.value) window.location.href=this.value;">
     <option selected disabled value="">Admin </option>
     <option value="{{ route('edition') }}">Édition</option>
-    <option value="{{ route('secretaire') }}">Sécretaire</option>
     <option value="{{ route('gestionnaire') }}">Gestionnaire</option>
   </select>
 </li>
@@ -134,22 +120,42 @@
     <a href="{{ route('utilisateurs') }}">Utilisateurs</a>
   </button>
 </li>
-
 <li class="navigation-item">
   <button class="secondary">
-    <a href="{{ route('roles') }}">Rôles</a>
+    <a href="{{ route('secretaire') }}">Secretaire</a>
   </button>
 </li>
-
 <li class="navigation-item">
-  <select name="resultat" aria-label="Résultat" onchange="if (this.value) window.location.href=this.value;">
-    <option selected disabled value="">Résultat </option>
-    <option value="{{ route('resultat.edition') }}">Édition</option>
-    <option value="{{ route('resultat.exportation') }}">Exportation</option>
-    <option value="{{ route('resultat.modification') }}">Modification</option>
+  <select name="admin" aria-label="Admin"
+          onchange="if (this.value) window.location.href = this.value;">
+    <option selected disabled value="">Gestionnaire </option>
+
+    <!-- Section Gestion -->
+    <option value="{{ route('epreuve') }}">Épreuve</option>
+    <option value="{{ route('college') }}">Collège</option>
+    <option value="{{ route('gestionnaire') }}">Gestionnaire</option>
+    <option value="{{ route('abonnement') }}">Abonnement</option>
+    <option value="{{ route('roles') }}">Rôles</option>
+
+    <!-- Séparateur visuel (facultatif, non cliquable) -->
+    <option disabled>──────────</option>
+
+    <!-- Section Résultat -->
+    <option value="{{ route('resultat.edition') }}">Résultat - Édition</option>
+    <option value="{{ route('resultat.exportation') }}">Résultat - Exportation</option>
+    <option value="{{ route('resultat.modification') }}">Résultat - Modification</option>
   </select>
 </li>
+  <select name="admin" aria-label="Admin"
+          onchange="if (this.value) window.location.href = this.value;">
+    <option selected disabled value="">Administrateur</option>
 
+    <!-- Section Gestion -->
+    <option value="{{ route('genre') }}">Genre</option>
+    <option value="{{ route('pays') }}">Pays</option>
+    <option value="{{ route('utilisateurs') }}">Utilisateurs</option>
+   </select>
+</li> 
 
       </li>
     </ul>
