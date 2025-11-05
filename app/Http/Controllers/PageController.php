@@ -7,87 +7,86 @@ use Illuminate\View\View;
 
 use App\Models\Classer;
 
-
 class PageController extends Controller
 {
-    public function home(): View
+    // --- Pages principales ---
+    public function accueil(): View
     {
         return view('accueil');
     }
 
+    // --- Classement ---
     public function eleves(): View
     {
-        return view('colleges.eleves');
+        return view('eleves');
     }
+
     public function equipe(): View
     {
-        return view('colleges.equipe');
-    }
-    public function epreuves(): View
-    {
-        return view('epreuves');
+        return view('equipe');
     }
 
-    public function classement(): View
+    public function college(): View
     {
-        $scores = Classer::getScoresByCategorie();
-        return view('classement', compact('scores'));
-    }
-    public function show2024(): View
-    {
-        return view('edition.2024');
-    }
-    public function show2025(): View
-    {
-        return view('edition.2025');
+        return view('college');
     }
 
-    public function saisie(): View
-    {
-        return view('saisie-note');
-    }
-    
-    public function epreuvesGestion(): View
-    {
-        return view('gestion.epreuves');
-    }
-    public function colleges(): View
-    {
-        return view('gestion.colleges');
-    }
-    public function abonnement(): View
-    {
-        return view('gestion.abonnement');
-    }
-    public function role(): View
-    {
-        return view('gestion.role');
-    }
-    public function edition(): View
-    {
-        return view('gestion.edition');
-    }
-    public function exportation(): View
-    {
-        return view('gestion.exportation');
-    }
-    public function modification(): View
-    {
-        return view('gestion.modification');
-    }
-    
+    // --- Autres sections ---
     public function genre(): View
     {
-        return view('admin.genre');
+        return view('genre');
     }
+
     public function pays(): View
     {
-        return view('admin.pays');
+        return view('pays');
     }
+
+    public function epreuve(): View
+    {
+        return view('epreuve');
+    }
+
+    // --- Admin ---
+    public function edition(): View
+    {
+        return view('edition');
+    }
+
+    public function secretaire(): View
+    {
+        return view('secretaire');
+    }
+
+    public function gestionnaire(): View
+    {
+        return view('gestionnaire');
+    }
+
+    // --- Utilisateurs & rôles ---
     public function utilisateurs(): View
     {
-        return view('admin.utilisateurs');
+        return view('utilisateurs');
+    }
+
+    public function roles(): View
+    {
+        return view('roles');
+    }
+
+    // --- Résultat ---
+    public function resultatEdition(): View
+    {
+        return view('resultat.edition');
+    }
+
+    public function resultatExportation(): View
+    {
+        return view('resultat.exportation');
+    }
+
+    public function resultatModification(): View
+    {
+        return view('resultat.modification');
     }
 }
-
-    
