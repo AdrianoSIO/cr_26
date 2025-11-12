@@ -32,7 +32,7 @@
             <td>{{ $role->nom }}</td>
             <td>{{ $role->commentaire}}</td>
             <td><center><button class="contrast"type="submit"><a href="{{ route('role.edit', ['role' => $role->id]) }}">Modifier</a></button> |
-                <form action="{{ route('role.suppression', ['role' => $role->code]) }}" method="POST" style="display:inline;">
+                <form action="{{ route('role.suppression', ['role' => $role->id]) }}" method="POST" style="display:inline;">
                     @csrf
                     @method('DELETE')
                     <button class="secondary" type="submit" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce role ?')">Supprimer</button>

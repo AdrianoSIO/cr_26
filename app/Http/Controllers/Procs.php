@@ -10,6 +10,10 @@ use App\Models\Genre;
 
 class Procs extends Controller
 {
+    public function creatPay():View
+    {
+        return view('pay.create');
+    }
     public function editPay($pay):View
     {
         $payModel = Pay::findOrFail($pay);
