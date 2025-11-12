@@ -13,6 +13,7 @@
 @section('contenu')
 <title>Gestion des Pays</title>
 <h1>Gestion des pays</h1>
+<p>Liste des pays enregistrés dans le système.</p>
 <table>
     <thead>
         <tr>

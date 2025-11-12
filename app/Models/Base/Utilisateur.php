@@ -52,7 +52,11 @@ class Utilisateur extends Model
 		'id_college' => 'int',
 		'id_equipe' => 'int'
 	];
-
+	public function utilisateurs()
+	{
+		$Genres = Genre::simplepaginate(10);
+		return $this->hasMany(Utilisateur::class,'code_genre','code');
+	}
 	public function user()
 	{
 		return $this->belongsTo(User::class, 'id');

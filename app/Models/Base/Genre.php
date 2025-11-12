@@ -33,6 +33,6 @@ class Genre extends Model
 	public function utilisateurs()
 	{
 		$Genres = Genre::simplepaginate(10);
-		return $this->hasMany(Utilisateur::class,'code_genre','code');
+		return $this->hasMany(Utilisateur::class,'code','code_genre');
 	}
 }

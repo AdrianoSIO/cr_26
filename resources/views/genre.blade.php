@@ -11,7 +11,9 @@
     }
 </style>
 @section('contenu')
+<title>Gestion des Genres</title>
 <h1>Gestion des genres</h1>
+<p>Liste des genres disponibles dans le système.</p>
 
 <table>
     <thead>

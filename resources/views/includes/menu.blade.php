@@ -2,7 +2,6 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Menu Aligné</title>
   <style>
     /* Style général du menu */
     nav {

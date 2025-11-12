@@ -69,10 +69,10 @@ class Procs extends Controller
         return redirect()->route('genre')->with('success', 'Genre mis à jour avec succès');
     }
 
-    // Supprimer un genre (sécurisé)
+    // C'est pour supp un genre
     public function SuppGenre(Genre $genre)
 {
-    // Vérifie si des utilisateurs sont liés
+    // Vérifie si y'a des utilisateurs de ce genre avant de supprimer
     if ($genre->utilisateurs()->count() > 0) {
         return redirect()->route('genre')
             ->with('error', 'Impossible de supprimer ce genre, il est utilisé par des utilisateurs.');

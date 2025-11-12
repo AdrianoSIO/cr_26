@@ -11,6 +11,7 @@
     }
 </style>
 @section('contenu')
+<title>Gestion des Rôles</title>
 <h1>Rôles</h1>
 <p>Gestion des rôles et permissions des utilisateurs.</p>
 <table>
