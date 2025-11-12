@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
-use App\Http\Controllers\Controllers;
 use App\Http\Controllers\Procs;
 
 // Menu principal
@@ -17,20 +16,22 @@ Route::get('classement', [PageController::class, 'classement'])->name('classemen
 Route::get('/genre', [PageController::class, 'genre'])->name('genre');
 Route::get('/pays', [PageController::class, 'pays'])->name('pays');
 // Pays - CRUD
-Route::get('/pays/creation', [PageController::class, 'createPay'])->name('pay.create');
+Route::get('/pays/creation', [Procs::class, 'createPay'])->name('pay.create');
 Route::get('/pays/{pay}/edit', [Procs::class, 'editPay'])->name('pay.edit');
 Route::put('/pays/{pay}', [Procs::class, 'MajPay'])->name('pay.update');
 Route::delete('/pays/{pay}', [Procs::class, 'SuppPay'])->name('pay.suppression');
 // Role _ CRUD
-Route::get('/role/creation', [PageController::class, 'createRole'])->name('role.create');
+Route::get('/role/creation', [Procs::class, 'createRole'])->name('role.create');
 Route::get('/role/{role}/edit', [Procs::class, 'editRole'])->name('role.edit');
 Route::put('/role/{role}', [Procs::class, 'MajRole'])->name('role.update');
 Route::delete('/role/{role}', [Procs::class, 'SuppRole'])->name('role.suppression');
 // Genre - CRUD
-Route::get('/genre/creation', [PageController::class, 'createGenre'])->name('genre.create');
+Route::get('/genre/creation', [Procs::class, 'createGenre'])->name('genre.create');
 Route::get('/genre/{genre}/edit', [Procs::class, 'editGenre'])->name('genre.edit');
 Route::put('/genre/{genre}', [Procs::class, 'MajGenre'])->name('genre.update');
 Route::delete('/genre/{genre}', [Procs::class, 'SuppGenre'])->name('genre.suppression');
+
+
 // Épreuve
 Route::get('/epreuve', [PageController::class, 'epreuve'])->name('epreuve');
 // Admin

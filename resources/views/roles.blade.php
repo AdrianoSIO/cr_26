@@ -13,7 +13,6 @@
 @section('contenu')
 <h1>Rôles</h1>
 <p>Gestion des rôles et permissions des utilisateurs.</p>
-<?php use App\Models\Role; ?>
 <table>
     <thead>
         <tr>
@@ -24,8 +23,6 @@
         </tr>
     </thead>
     <tbody>
-
-        <?php $roles = role::all(); ?>
         @foreach($roles as $role)
         <tr>
             <td>{{ $role->code }}</td>

@@ -12,7 +12,7 @@ class Procs extends Controller
 {
     public function creatPay():View
     {
-        return view('pay.create');
+        return view('pay.ajout');
     }
     public function editPay($pay):View
     {
@@ -50,21 +50,36 @@ class Procs extends Controller
         $roleModel->delete();
         return redirect()->route('roles')->with('success', 'Rôle supprimé avec succès');
     }
-    public function editGenre($genre):View
+    // Afficher le formulaire d'édition
+    public function editGenre(Genre $genre): View
     {
-        $genreModel = Genre::findOrFail($genre);
-        return view('genre.edit', compact('genreModel'));
+        return view('genre.edit', compact('genre'));
     }
-    public function MajGenre(Request $request, $genre)
+
+    // Mettre à jour le genre
+    public function MajGenre(Request $request, Genre $genre)
     {
-        $genreModel =Genre::findOrFail($genre);
-        $genreModel->update($request->only(['code','nom', 'commentaire']));
+        $validated = $request->validate([
+            'nom' => 'required|string|max:255',
+            'commentaire' => 'nullable|string|max:500',
+        ]);
+
+        $genre->update($validated);
+
         return redirect()->route('genre')->with('success', 'Genre mis à jour avec succès');
     }
-    public function SuppGenre($genre)
-    {
-        $genreModel =Genre::findOrFail($genre);
-        $genreModel->delete();
-        return redirect()->route('genre')->with('success', 'Genre supprimé avec succès');   
+
+    // Supprimer un genre (sécurisé)
+    public function SuppGenre(Genre $genre)
+{
+    // Vérifie si des utilisateurs sont liés
+    if ($genre->utilisateurs()->count() > 0) {
+        return redirect()->route('genre')
+            ->with('error', 'Impossible de supprimer ce genre, il est utilisé par des utilisateurs.');
     }
+
+    $genre->delete();
+
+    return redirect()->route('genre')->with('success', 'Genre supprimé avec succès');
+}
 }

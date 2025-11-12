@@ -11,36 +11,35 @@
     }
 </style>
 @section('contenu')
-<title>Gestion des genres</title>
 <h1>Gestion des genres</h1>
-<?php use App\Models\Genre; ?>
+
 <table>
     <thead>
         <tr>
-            <th>Identifiant du Genre</th>
-            <th>Nom du Genre</th>
+            <th>Code</th>
+            <th>Nom</th>
             <th>Commentaire</th>
             <th>Actions</th>
         </tr>
     </thead>
-    <body>
-
-        
-        <?php $Genres = Genre::simplepaginate(10)?>
-        @foreach($Genres as $Genre)
-        <tr>
-            <td>{{ $Genre->code }}</td>
-            <td>{{ $Genre->nom }}</td>
-            <td>{{ $Genre->commentaire}}</td>
-            <td><center><button class="contrast"type="submit"><a href="{{ route('genre.edit', ['genre' => $Genre->code]) }}">Modifier</a></button> |
-                <form action="{{ route('genre.suppression', ['genre' => $Genre->code]) }}" method="POST" style="display:inline;">
-                    @csrf
-                    @method('DELETE')
-                    <button class="secondary" type="submit" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce genre ?')">Supprimer</button>
-                </form>
-                </center>
-            </td>
-        </tr>
+    <tbody>
+        @foreach($genres as $genre)
+            <tr>
+                <td>{{ $genre->code }}</td>
+                <td>{{ $genre->nom }}</td>
+                <td>{{ $genre->commentaire }}</td>
+                <td>
+                    <a href="{{ route('genre.edit', ['genre' => $genre->code]) }}">Modifier</a>
+                    <form class="secondary"action="{{ route('genre.suppression', ['genre' => $genre->code]) }}" method="POST" style="display:inline;">
+                        @csrf
+                        @method('DELETE')
+                        <button class="contrast"type="submit" onclick="return confirm('Confirmer la suppression ?')">
+                            Supprimer
+                        </button>
+                    </form>
+                </td>
+            </tr>
         @endforeach
-    </body>
+    </tbody>
+</table>
 @endsection

@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Models\Pay;
-use App\Models\Classer;
-
+use App\Models\Genre;
+use App\Models\Role;
+use Illuminate\Support\Facades\DB;
 class PageController extends Controller
 {
     // --- Pages principales ---
@@ -31,17 +32,21 @@ class PageController extends Controller
         return view('college');
     }
 
-    // --- Autres sections ---
-    public function genre(): View
-    {
-        return view('genre');
-    }
+    
+
+public function genre()
+{
+    $genres = Genre::simplePaginate(10); // récupère 10 genres par page
+    return view('genre', compact('genres'));
+}
+
 
     public function pays(): View
-    {
+{
+    $pays = Pay::simplePaginate(10); // récupère 10 pays par page
+    return view('pays', compact('pays'));
+}
 
-        return view('pays');
-    }
 
     public function epreuve(): View
     {
@@ -72,7 +77,8 @@ class PageController extends Controller
 
     public function roles(): View
     {
-        return view('roles');
+        $roles = Role::simplePaginate(10); // récupère 10 genres par page
+    return view('roles', compact('roles'));
     }
 
     // --- Résultat ---

@@ -13,15 +13,15 @@
 <title>Modifier le Genre</title>
 <h1>Modifier le Genre</h1>
 
-<form action="{{ route('genre.update', ['genre' => $genreModel->code]) }}" method="POST">
+<form action="{{ route('genre.update', ['genre' => $genre->code]) }}" method="POST">
     @csrf
     @method('PUT')
     
     <label for="nom">Nom du Genre:</label>
-    <input type="text" id="nom" name="nom" value='{{ $genreModel->nom }}'required>
+    <input type="text" id="nom" name="nom" value='{{ $genre->nom }}'required>
     <br>
     <label for="commentaire">Commentaire:</label>
-    <textarea id="commentaire" name="commentaire">{{ $genreModel->commentaire }}</textarea>
+    <textarea id="commentaire" name="commentaire">{{ $genre->commentaire }}</textarea>
     <br>
     <button type="submit"class="contrast">Mettre à jour</button>
     <br>

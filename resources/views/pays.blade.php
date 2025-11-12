@@ -13,26 +13,22 @@
 @section('contenu')
 <title>Gestion des Pays</title>
 <h1>Gestion des pays</h1>
-<?php use App\Models\Pay; ?>
 <table>
     <thead>
         <tr>
-            <th>Identifiant du Pays</th>
-            <th>Nom du Pays</th>
-            <th>Commentaire</th>
+            <th>Code</th>
+            <th>Nom</th>
+            <th>Precision</th>
             <th>Actions</th>
         </tr>
     </thead>
-    <body>
-
-
-        <?php $pays = Pay::simplepaginate(10)?>
+    <tbody>
         @foreach($pays as $pay)
-        <tr>
-            <td><center>{{ $pay->code }} </center></td>
-            <td><center>{{ $pay->nom }}</center></td>
-            <td><center>{{ $pay->commentaire}}</center></td>
-            <td><center><button class="contrast"type="submit"><a href="{{ route('pay.edit', ['pay' => $pay->code]) }}">Modifier</a></button> |
+            <tr>
+                <td>{{ $pay->code }}</td>
+                <td>{{ $pay->nom }}</td>
+                <td>{{ $pay->commentaire }}</td>
+                <td><center><button class="contrast"type="submit"><a href="{{ route('pay.edit', ['pay' => $pay->code]) }}">Modifier</a></button> |
                 <form action="{{ route('pay.suppression', ['pay' => $pay->code]) }}" method="POST" style="display:inline;">
                     @csrf
                     @method('DELETE')
@@ -40,12 +36,11 @@
                 </form>
                 </center>
             </td>
-        </tr>
+            </tr>
         @endforeach
-    </body>
+    </tbody>
 </table>
-{!! $pays->links() !!}
 
-
-
+<!-- Liens de pagination -->
+{{ $pays->links() }}
 @endsection

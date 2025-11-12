@@ -65,7 +65,7 @@ class Utilisateur extends Model
 
 	public function genre()
 	{
-		return $this->belongsTo(Genre::class, 'code_genre');
+		return $this->belongsTo(Genre::class, 'code_genre','code');
 	}
 
 	public function college()
