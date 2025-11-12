@@ -32,7 +32,6 @@ class Pay extends Model
 
 	public function colleges()
 	{
-		
 		return $this->hasMany(College::class, 'code_pays');
 	}
 }
