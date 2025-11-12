@@ -39,6 +39,7 @@ class PageController extends Controller
 
     public function pays(): View
     {
+        
         return view('pays');
     }
 

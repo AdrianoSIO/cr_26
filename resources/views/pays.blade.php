@@ -3,7 +3,9 @@
 @section('contenu')
 <title>Gestion des Pays</title>
 <h1>Gestion des pays</h1>
-<?php use App\Models\Pay; ?>
+<?php use App\Models\Pay; 
+use Illuminate\Pagination\LengthAwarePaginator; 
+?>
 <table>
     <thead>
         <tr>
@@ -14,14 +16,17 @@
     </thead>
     <tbody>
 
-        <?php $pays = Pay::all(); ?>
+        <?php $pays = Pay::paginate(10) ?>
+        
         @foreach($pays as $pay)
         <tr>
+            
             <td>{{ $pay->code }}</td>
             <td>{{ $pay->nom }}</td>
             <td>{{ $pay->commentaire}}</td>
         </tr>
         @endforeach
+        {!! $pays->links() !!}
     </tbody>
 </table>
 @endsection
