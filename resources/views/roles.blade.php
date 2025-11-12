@@ -20,6 +20,7 @@
             <th>Identifiant du Rôle</th>
             <th>Nom du rôle</th>
             <th>Commentaire</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -30,6 +31,14 @@
             <td>{{ $role->code }}</td>
             <td>{{ $role->nom }}</td>
             <td>{{ $role->commentaire}}</td>
+            <td><center><button class="contrast"type="submit"><a href="{{ route('role.edit', ['role' => $role->id]) }}">Modifier</a></button> |
+                <form action="{{ route('role.suppression', ['role' => $role->code]) }}" method="POST" style="display:inline;">
+                    @csrf
+                    @method('DELETE')
+                    <button class="secondary" type="submit" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce role ?')">Supprimer</button>
+                </form>
+                </center>
+            </td>
         </tr>
         @endforeach
     </tbody>

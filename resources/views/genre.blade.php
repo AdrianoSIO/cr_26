@@ -20,6 +20,7 @@
             <th>Identifiant du Genre</th>
             <th>Nom du Genre</th>
             <th>Commentaire</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <body>
@@ -31,6 +32,14 @@
             <td>{{ $Genre->code }}</td>
             <td>{{ $Genre->nom }}</td>
             <td>{{ $Genre->commentaire}}</td>
+            <td><center><button class="contrast"type="submit"><a href="{{ route('genre.edit', ['genre' => $Genre->code]) }}">Modifier</a></button> |
+                <form action="{{ route('genre.suppression', ['genre' => $Genre->code]) }}" method="POST" style="display:inline;">
+                    @csrf
+                    @method('DELETE')
+                    <button class="secondary" type="submit" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce genre ?')">Supprimer</button>
+                </form>
+                </center>
+            </td>
         </tr>
         @endforeach
     </body>
