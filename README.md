@@ -20,6 +20,7 @@ Le projet est développé avec **PHP Laravel**, afin de proposer une solution mo
 ---
 
 ## 👥 Rôles utilisateurs
+- **ADRIANO** : accès à tout au courant de tout c'est un dieu
 - **Visiteur** : consultation des infos générales.  
 - **Abonné** : accès en lecture seule.  
 - **Élève** : membre d’équipe, jury ou secrétaire.  
