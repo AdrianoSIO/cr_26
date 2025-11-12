@@ -1,5 +1,15 @@
 @extends('includes.default')
-
+<style>
+    table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+        min-width: 300px;
+        max-width: 100px;
+    }
+    th, td {
+        padding: 10px;
+    }
+</style>
 @section('contenu')
 <h1>Rôles</h1>
 <p>Gestion des rôles et permissions des utilisateurs.</p>
