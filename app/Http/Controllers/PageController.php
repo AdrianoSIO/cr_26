@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\View\View;
-
+use App\Models\Pay;
 use App\Models\Classer;
 
 class PageController extends Controller
@@ -39,8 +39,28 @@ class PageController extends Controller
 
     public function pays(): View
     {
-        
+
         return view('pays');
+    }
+
+    public function editPay($pay): View
+    {
+        $payModel = Pay::findOrFail($pay);
+        return view('pay.edit', compact('payModel'));
+    }
+
+    public function MajPay(Request $request, $pay)
+    {
+        $payModel = Pay::findOrFail($pay);
+        $payModel->update($request->only(['nom', 'commentaire']));
+        return redirect()->route('pays')->with('success', 'Pays mis à jour avec succès');
+    }
+
+    public function SuppPay($pay)
+    {
+        $payModel = Pay::findOrFail($pay);
+        $payModel->delete();
+        return redirect()->route('pays')->with('success', 'Pays supprimé avec succès');
     }
 
     public function epreuve(): View

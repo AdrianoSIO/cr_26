@@ -17,8 +17,8 @@
 <table>
     <thead>
         <tr>
-            <th>code</th>
-            <th>Nom</th>
+            <th>Identifiant du Rôle</th>
+            <th>Nom du rôle</th>
             <th>Commentaire</th>
         </tr>
     </thead>

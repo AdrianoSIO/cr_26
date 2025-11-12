@@ -17,25 +17,27 @@
 <table>
     <thead>
         <tr>
-            <th>code</th>
-            <th>Nom</th>
+            <th>Identifiant du Pays</th>
+            <th>Nom du Pays</th>
             <th>Commentaire</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <body>
 
-        
+
         <?php $pays = Pay::simplepaginate(10)?>
         @foreach($pays as $pay)
         <tr>
             <td>{{ $pay->code }}</td>
             <td>{{ $pay->nom }}</td>
             <td>{{ $pay->commentaire}}</td>
+            <td><a href="{{ route('pay.edit', ['pay' => $pay->code]) }}">Modifier</a> | <a href="{{ route('pay.suppression', ['pay' => $pay->code]) }}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce pays ?')">Supprimer</a></td>
         </tr>
         @endforeach
     </body>
 </table>
-{{ $pays->links() }}
+{!! $pays->links() !!}
 
 
 

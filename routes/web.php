@@ -14,6 +14,9 @@ Route::get('classement', [PageController::class, 'classement'])->name('classemen
 // Autres sections
 Route::get('/genre', [PageController::class, 'genre'])->name('genre');
 Route::get('/pays', [PageController::class, 'pays'])->name('pays');
+Route::get('/pays/{pay}/edit', [PageController::class, 'editPay'])->name('pay.edit');
+Route::put('/pays/{pay}', [PageController::class, 'MajPay'])->name('pay.update');
+Route::delete('/pays/{pay}', [PageController::class, 'SuppPay'])->name('pay.suppression');
 Route::get('/epreuve', [PageController::class, 'epreuve'])->name('epreuve');
 // Admin
 Route::get('/admin/edition', [PageController::class, 'edition'])->name('edition');

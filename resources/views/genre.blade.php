@@ -13,24 +13,24 @@
 @section('contenu')
 <title>Gestion des genres</title>
 <h1>Gestion des genres</h1>
-<?php use App\Models\Role; ?>
+<?php use App\Models\Genre; ?>
 <table>
     <thead>
         <tr>
-            <th>code</th>
-            <th>Nom</th>
+            <th>Identifiant du Genre</th>
+            <th>Nom du Genre</th>
             <th>Commentaire</th>
         </tr>
     </thead>
     <body>
 
         
-        <?php $roles = Role::simplepaginate(10)?>
-        @foreach($roles as $role)
+        <?php $Genres = Genre::simplepaginate(10)?>
+        @foreach($Genres as $Genre)
         <tr>
-            <td>{{ $role->code }}</td>
-            <td>{{ $role->nom }}</td>
-            <td>{{ $role->commentaire}}</td>
+            <td>{{ $Genre->code }}</td>
+            <td>{{ $Genre->nom }}</td>
+            <td>{{ $Genre->commentaire}}</td>
         </tr>
         @endforeach
     </body>

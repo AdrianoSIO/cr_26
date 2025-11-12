@@ -32,6 +32,6 @@ class Genre extends Model
 
 	public function utilisateurs()
 	{
-		return $this->hasMany(Utilisateur::class, 'code_genre');
+		return $this->hasMany(Utilisateur::class, 'code');
 	}
 }
