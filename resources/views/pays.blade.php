@@ -29,10 +29,17 @@
         <?php $pays = Pay::simplepaginate(10)?>
         @foreach($pays as $pay)
         <tr>
-            <td>{{ $pay->code }}</td>
-            <td>{{ $pay->nom }}</td>
-            <td>{{ $pay->commentaire}}</td>
-            <td><a href="{{ route('pay.edit', ['pay' => $pay->code]) }}">Modifier</a> | <a href="{{ route('pay.suppression', ['pay' => $pay->code]) }}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce pays ?')">Supprimer</a></td>
+            <td><center>{{ $pay->code }} </center></td>
+            <td><center>{{ $pay->nom }}</center></td>
+            <td><center>{{ $pay->commentaire}}</center></td>
+            <td><center><button class="contrast"type="submit"><a href="{{ route('pay.edit', ['pay' => $pay->code]) }}">Modifier</a></button> |
+                <form action="{{ route('pay.suppression', ['pay' => $pay->code]) }}" method="POST" style="display:inline;">
+                    @csrf
+                    @method('DELETE')
+                    <button class="secondary" type="submit" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce pays ?')">Supprimer</button>
+                </form>
+                </center>
+            </td>
         </tr>
         @endforeach
     </body>

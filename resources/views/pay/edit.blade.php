@@ -18,6 +18,7 @@
     <br>
 </form>
 <center>
-<a href="{{ route('pays') }}">Retour à la liste</a>
+
+<button type="button" class="secondary"><a href="{{ route('pays') }}">Retour à la liste</a>
 </center>
 @endsection
