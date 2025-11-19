@@ -1,156 +1,94 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <style>
-    /* Style général du menu */
-    nav {
-      background-color: #f5f5f5;
-      padding: 10px 20px;
-      display: flex;
-      justify-content: center; /* Centre tout le menu */
-      align-items: center;
-      gap: 15px; /* espace entre éléments */
-      border-radius: 12px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      font-family: Arial, sans-serif;
-    }
+<?php
 
-    ul.navigation {
-      list-style: none;
-      display: flex;
-      align-items: center;
-      margin: 0;
-      padding: 0;
-      gap: 15px;
-    }
+use App\Livewire\Actions\Logout;
+use function Livewire\Volt\action;
 
-    li.navigation-item {
-      display: flex;
-      align-items: center;
-    }
+$logout = action(function (Logout $logoutAction) {
+    $logoutAction();
+    $this->redirect('/', navigate: true);
+});
+?>
+<nav class="navbar">
+    <div class="navbar-brand">
+        <a href="{{ route('accueil') }}">Projet concours-robots</a>
+        <button class="burger" id="burger">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
 
-    button {
-      border: none;
-      border-radius: 8px;
-      padding: 8px 15px;
-      cursor: pointer;
-      font-size: 14px;
-      transition: background 0.3s ease;
-    }
+    <ul class="nav-links" id="nav-links">
+        <li><a href="{{ route('accueil') }}">Accueil</a></li>
 
-    button.contrast {
-      background-color: #333;
-      color: white;
-    }
+        @guest
+        <li class="dropdown">
+            <a href="#">Collèges ▾</a>
+            <ul class="dropdown-menu">
+                <li><a href="{{ route('eleves') }}">Élèves</a></li>
+                <li><a href="{{ route('equipe') }}">Équipe</a></li>
+            </ul>
+        </li>
 
-    button.contrast:hover {
-      background-color: #555;
-    }
+        <li><a href="{{ route('epreuve') }}">Épreuves</a></li>
+        <li><a href="{{ route('classement') }}">Classement</a></li>
 
-    button.secondary {
-      background-color: #ddd;
-      color: #333;
-    }
+        @if (Route::has('login'))
+        <li><a href="{{ route('login') }}">Connexion</a></li>
+        @endif
+        @if (Route::has('register'))
+        <li><a href="{{ route('register') }}">Inscription</a></li>
+        @endif
+        @else
+        <li class="dropdown">
+            <a href="#">Collèges ▾</a>
+            <ul class="dropdown-menu">
+                <li><a href="{{ route('eleves') }}">Élèves</a></li>
+                <li><a href="{{ route('equipe') }}">Équipe</a></li>
+            </ul>
+        </li>
 
-    button.secondary:hover {
-      background-color: #ccc;
-    }
+        <li><a href="{{ route('epreuve') }}">Épreuves</a></li>
+        <li><a href="{{ route('classement') }}">Classement</a></li>
 
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
+        <li class="dropdown">
+            <a href="#">Page Gestion ▾</a>
+            <ul class="dropdown-menu">
+                <li><a href="{{ route('epreuve') }}">Épreuves</a></li>
+                <li><a href="{{ route('college') }}">Collèges</a></li>
+                <li><a href="{{ route('abonnement') }}">Abonnement</a></li>
+                <li><a href="{{ route('roles') }}">Rôle</a></li>
+                <li class="dropdown">
+                    <a href="#">Résultat ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{{ route('resultat.edition') }}">Édition</a></li>
+                        <li><a href="{{ route('resultat.exportation') }}">Exportation</a></li>
+                        <li><a href="{{ route('resultat.modification') }}">Modification</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
 
-    select {
-      border-radius: 8px;
-      padding: 8px 10px;
-      border: 1px solid #aaa;
-      background-color: white;
-      font-size: 14px;
-      cursor: pointer;
-    }
+        <li class="dropdown">
+            <a href="#">Page Admin ▾</a>
+            <ul class="dropdown-menu">
+                <li><a href="{{ route('genre') }}">Genre</a></li>
+                <li><a href="{{ route('utilisateurs') }}">Utilisateurs</a></li>
+                <li><a href="{{ route('pays') }}">Pays</a></li>
+            </ul>
+        </li>
 
-    select:focus {
-      outline: none;
-      border-color: #333;
-    }
-  </style>
-</head>
-<body>
-
-  <nav>
-    <li class="navigation-item">
-  <button class="contrast">
-    <a href="{{ route('accueil') }}">Accueil</a>
-  </button>
-</li>
-
-<li class="navigation-item">
-  <select name="classement" aria-label="Classement" onchange="if (this.value) window.location.href=this.value;">
-    <option selected disabled value="">Collège </option>
-    <option value="{{ route('eleves') }}">Élève</option>
-    <option value="{{ route('equipe') }}">Équipe</option>
-  </select>
-</li>
-<li class="navigation-item">
-  <button class="secondary">
-    <a href="{{ route('classement') }}">Classement</a>
-  </button>
-</li>
-<li class="navigation-item">
-  <select name="admin" aria-label="Admin" onchange="if (this.value) window.location.href=this.value;">
-    <option selected disabled value="">Edition </option>
-    <option value="{{ route('edition') }}">2025</option>
-    <option value="{{ route('edition') }}">2024</option>
-  </select>
-</li>
-
-<li class="navigation-item">
-  <button class="contrast">
-    <a href="{{ route('utilisateurs') }}">Utilisateurs</a>
-  </button>
-</li>
-<li class="navigation-item">
-  <button class="secondary">
-    <a href="{{ route('secretaire') }}">Secretaire</a>
-  </button>
-</li>
-<li class="navigation-item">
-  <select name="admin" aria-label="Admin"
-          onchange="if (this.value) window.location.href = this.value;">
-    <option selected disabled value="">Gestionnaire </option>
-
-    <!-- Section Gestion -->
-    <option value="{{ route('epreuve') }}">Épreuve</option>
-    <option value="{{ route('college') }}">Collège</option>
-    <option value="{{ route('gestionnaire') }}">Gestionnaire</option>
-    <option value="{{ route('abonnement') }}">Abonnement</option>
-    <option value="{{ route('roles') }}">Rôles</option>
-
-    <!-- Séparateur visuel (facultatif, non cliquable) -->
-    <option disabled>──────────</option>
-
-    <!-- Section Résultat -->
-    <option value="{{ route('resultat.edition') }}">Résultat - Édition</option>
-    <option value="{{ route('resultat.exportation') }}">Résultat - Exportation</option>
-    <option value="{{ route('resultat.modification') }}">Résultat - Modification</option>
-  </select>
-</li>
-  <select name="admin" aria-label="Admin"
-          onchange="if (this.value) window.location.href = this.value;">
-    <option selected disabled value="">Administrateur</option>
-
-    <!-- Section Gestion -->
-    <option value="{{ route('genre') }}">Genre</option>
-    <option value="{{ route('pays') }}">Pays</option>
-    <option value="{{ route('utilisateurs') }}">Utilisateurs</option>
-   </select>
-</li> 
-
-      </li>
+        <!-- Déconnexion -->
+        <li>
+        @livewire('layouts.navigation')
+        </li>
+        @endguest
     </ul>
-  </nav>
+</nav>
 
-</body>
-</html>
+<script>
+    const burger = document.getElementById('burger');
+    const navLinks = document.getElementById('nav-links');
+
+    burger.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+    });
+</script>

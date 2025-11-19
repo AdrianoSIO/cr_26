@@ -1,5 +1,5 @@
 @extends('includes.default')
-
+@section('title', 'Accueil')
 @section('contenu')
 <title>Abonnement</title>
 <h1>Abonnement</h1>

@@ -1,27 +1,28 @@
 <!doctype html>
-<html lang="fr">
+<html lang="fr" data-theme="light">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="css/pico.amber.css" media="all">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Application de gestion du concours de robots des collèges (Deux-Sèvres) : inscriptions, saisie des notes, résultats et informations générales." />
+  <link href="/css/pico.css" rel="stylesheet" />
+  <link href="/css/style.css" rel="stylesheet" />
+  <title>@yield('title', 'Concours Robot')</title>
 </head>
+<style>
+  
+</style>
 <body>
-    
-<div class="website">
-<header class="header">
-@include('includes.header')
+  <div class="wrapper">
+    <header>
+      @include('includes.menu')
+    </header>
 
-</header>
-<aside class="aside">
-<nav class="navigation">
-@include('includes.menu')
-</nav>
-</aside>
-<center>
-<main id="main" class="main">
-@yield('contenu')
-</main>
-</center>
-</div>
+    <main id="main" role="main">
+      @yield('content')
+    </main>
+
+    @include('includes.footer')
+  </div>
 </body>
 </html>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

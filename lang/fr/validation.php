@@ -11,4 +11,5 @@ return [
     'nom' => [
         'required' => 'Le nom du genre est obligatoire.',
     ],
+    
 ];

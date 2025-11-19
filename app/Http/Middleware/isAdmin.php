@@ -10,8 +10,8 @@ class IsAdmin
 {
     public function handle(Request $request, Closure $next)
     {
-        if (!Auth::check() || !Auth::user()->role || Auth::user()->role->name !== 'admin') {
-            abort(403, 'Accès interdit');
+        if (!Auth::check() || Auth::user()->role?->code !== 'ADM') {
+            abort(403, 'Accès interdit : réservé aux administrateurs.');
         }
 
         return $next($request);
