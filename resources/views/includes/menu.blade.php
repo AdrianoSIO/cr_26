@@ -8,6 +8,11 @@ $logout = action(function (Logout $logoutAction) {
     $this->redirect('/', navigate: true);
 });
 ?>
+@php
+    $roleId = Auth::check() ? Auth::user()->getRoleId() : null;
+    print_r($roleId);
+@endphp
+
 <nav class="navbar">
     <div class="navbar-brand">
         <a href="{{ route('accueil') }}">Projet concours-robots</a>
@@ -36,13 +41,13 @@ $logout = action(function (Logout $logoutAction) {
 
         @guest
             {{-- Menu invité --}}
-            @if (Route::has('login'))
+            @if(Route::has('login'))
                 <li><a href="{{ route('login') }}">Connexion</a></li>
             @endif
-            @if (Route::has('register'))
+            @if(Route::has('register'))
                 <li><a href="{{ route('register') }}">Inscription</a></li>
             @endif
-        @else 
+        @else
             {{-- Menu utilisateurs connectés --}}
             <li class="dropdown">
                 <a href="#">Pages Membres ▾</a>
@@ -62,8 +67,8 @@ $logout = action(function (Logout $logoutAction) {
                 </ul>
             </li>
 
-            {{-- Menu admin uniquement pour rôle ADM --}}
-            @if(Auth::user()?->engager?->role?->id_role != 90)
+            {{-- Menu Admin uniquement si id_role = 90 --}}
+            @if($roleId === 90)
                 <li class="dropdown">
                     <a href="#">Page Admin ▾</a>
                     <ul class="dropdown-menu">

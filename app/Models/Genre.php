@@ -19,4 +19,8 @@ class Genre extends BaseGenre
         // hasMany(RelatedModel, foreign_key_in_utilisateurs, local_key_in_genres)
         return $this->hasMany(\App\Models\Utilisateur::class, 'code_genre', 'code');
     }
+    public function engagers()
+    {
+        return $this->hasMany(Engager::class, 'id_genre');
+    }
 }

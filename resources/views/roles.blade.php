@@ -62,16 +62,26 @@ button a {
             <td >{{ $role->code }}</td>
             <td >{{ $role->nom }}</td>
             <td >{{ $role->commentaire}}</td>
-            <td >
-                <div class="actions-cell">
-                    <button class="contrast"type="submit"><a href="{{ route('role.edit', ['role' => $role->id]) }}">Modifier</a></button>
-                <form action="{{ route('role.suppression', ['role' => $role->id]) }}" method="POST" style="display:inline;">
-                    @csrf
-                    @method('DELETE')
-                    <button class="secondary" type="submit" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce role ?')">Supprimer</button>
-                </form>
-            </div>
-            </td>
+            <td>
+    <div class="actions-cell">
+
+        <!-- Bouton Modifier -->
+        <a href="{{ route('role.edit', $role) }}" class="contrast" style="padding: 6px 12px; display: inline-block;">
+            Modifier
+        </a>
+
+        <!-- Bouton Supprimer -->
+        <form action="{{ route('role.suppression', $role) }}" method="POST" style="display:inline;">
+            @csrf
+            @method('DELETE')
+            <button class="secondary" type="submit"
+                onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce rôle ?')">
+                Supprimer
+            </button>
+        </form>
+    </div>
+</td>
+
         </tr>
         @endforeach
     </tbody>

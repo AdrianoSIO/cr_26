@@ -1,13 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Models\Pay;
-use App\Models\Role;
 use App\Models\Genre;
-use App\Models\User; // pour gérer les engager liés aux rôles
+use App\Models\Role;
+use App\Models\Utilisateur;
+use App\Models\User; // pour gérer les engagers liés aux rôles
 
 class Procs extends Controller
 {
@@ -115,40 +115,44 @@ class Procs extends Controller
     }
 
     /**
-     * Suppression d'un rôle avec choix pour les engager
+     * Suppression d'un rôle avec choix pour les engagers
      */
     public function SuppRole(Request $request, $role)
 {
     $roleModel = Role::findOrFail($role);
 
-    // Compter les engager liés via la relation HasMany
-    $utilisateursCount = $roleModel->engager()->count();
+    // Compter les engagers liés
+    $utilisateursCount = $roleModel->engagers()->count();
 
     // Si aucune action n'a été choisie, afficher le formulaire
     if (!$request->has('action')) {
         return view('role.confirmation', [
             'roleModel' => $roleModel,
-            'utilisateursCount' => $utilisateursCount
+            'utilisateursCount' => $utilisateursCount  // <-- nom harmonisé
         ]);
     }
 
     switch ($request->input('action')) {
         case 'delete_users':
-            foreach ($roleModel->engager as $user) {
-                $user->delete();
-            }
+            // Supprimer tous les engagers liés à ce rôle
+            \App\Models\Engager::where('id_role', $roleModel->id)->delete();
+
+            // Supprimer le rôle
             $roleModel->delete();
+
             return redirect()->route('roles')
-                ->with('success', 'Rôle et engager supprimés avec succès.');
+                ->with('success', 'Rôle et utilisateurs supprimés avec succès.');
 
         case 'keep_users':
-            foreach ($roleModel->engager as $user) {
-                $user->id_role = null; // ou role_id selon ta table
-                $user->save();
-            }
+            // Laisser les engagers mais dissocier le rôle
+            \App\Models\Engager::where('id_role', $roleModel->id)
+                ->update(['id_role' => null]);
+
+            // Supprimer le rôle
             $roleModel->delete();
+
             return redirect()->route('roles')
-                ->with('success', 'Rôle supprimé, les engager restent sans rôle.');
+                ->with('success', 'Rôle supprimé, les utilisateurs restent sans rôle.');
 
         case 'cancel':
         default:
@@ -156,6 +160,7 @@ class Procs extends Controller
                 ->with('info', 'Suppression annulée.');
     }
 }
+
 
 
     /* --------------------------------------------- */
@@ -193,17 +198,53 @@ class Procs extends Controller
         return redirect()->route('genre')
             ->with('success', 'Genre mis à jour avec succès');
     }
+    public function SuppGenre(Request $request, $genreId)
+{
+    $genre = Genre::findOrFail($genreId);
 
-    public function SuppGenre(Genre $genre)
-    {
-        if ($genre->engager()->count() > 0) {
-            return redirect()->route('genre')
-                ->with('error', 'Impossible de supprimer ce genre, il est utilisé par des engager.');
-        }
+    // Récupérer les utilisateurs liés à ce genre
+    $userIds = Utilisateur::where('code_genre', $genre->code)->pluck('id');
+    $utilisateursCount = $userIds->count();
 
-        $genre->delete();
-
-        return redirect()->route('genre')
-            ->with('success', 'Genre supprimé avec succès');
+    // Afficher le formulaire de confirmation si aucune action n'a été choisie
+    if (!$request->has('action')) {
+        return view('genre.confirmation', [
+            'genreModel' => $genre,
+            'utilisateursCount' => $utilisateursCount
+        ]);
     }
+
+    switch ($request->input('action')) {
+
+        case 'delete_users':
+            // Supprimer d'abord les engagers liés à ces utilisateurs
+            \App\Models\Engager::whereIn('id_utilisateur', $userIds)->delete();
+
+            // Supprimer les utilisateurs
+            Utilisateur::whereIn('id', $userIds)->delete();
+
+            // Supprimer le genre
+            $genre->delete();
+
+            return redirect()->route('genre.ajout.form')
+                ->with('success', 'Genre et utilisateurs supprimés avec succès.');
+
+        case 'keep_users':
+            // Dissocier le genre pour les utilisateurs
+            Utilisateur::whereIn('id', $userIds)
+                       ->update(['code_genre' => null]);
+
+            // Supprimer le genre
+            $genre->delete();
+
+            return redirect()->route('genre.ajout.form')
+                ->with('success', 'Genre supprimé, les utilisateurs restent sans genre.');
+
+        case 'cancel':
+        default:
+            return redirect()->route('genre.ajout.form')
+                ->with('info', 'Suppression annulée.');
+    }
+}
+
 }

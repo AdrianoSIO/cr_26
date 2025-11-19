@@ -52,9 +52,16 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
-    public function role()
-{
-    return $this->belongsTo(Role::class);
-}
+    public function engager()
+    {
+        return $this->hasOne(Engager::class, 'id_utilisateur', 'id');
+        // id_utilisateur = clé étrangère dans Engager
+        // id = clé primaire dans User
+    }
 
+    // Méthode pratique pour récupérer l'id_role via Engager
+    public function getRoleId(): ?int
+    {
+        return $this->engager?->id_role;
+    }
 }

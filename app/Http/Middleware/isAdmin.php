@@ -3,33 +3,19 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
-use App\Requetes\RequeteSupport;
-use App\Models\RechercheUer;
-
+use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Auth;
 class IsAdmin
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
-     */
-    public function handle(Request $request, Closure $next): Response
+    public function handle(Request $request, Closure $next)
     {
-        $user = Auth::user();
+                    $role=!Auth::check() || Auth::user()->role?->id_role;
 
-        if (!$user) {
-            return redirect()->route('login')->with('Erreur', 'Veuillez vous connecter');
+        if ($role== 90) {
+            abort(403, 'Accès interdit : réservé aux administrateurs.');
         }
 
-        $role = RechercheUer::recupRole($user->id);
-
-        if (!$role || $role->id_role != 90) {
-            return redirect()->route('accueil')->with('Erreur', 'Refus d\'acces : Vous n\'etes pas un administrateur');
-        }
-        
         return $next($request);
     }
 }

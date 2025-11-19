@@ -20,19 +20,20 @@ class UserController extends Controller
         ]);
 
         if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
+    $request->session()->regenerate();
 
-            // Vérification du rôle
-            if (Auth::user()->role?->id_role == 90) {
-                return redirect()->route('admin.dashboard');
-            }
+    $role = Auth::user()->role?->id_role;
 
-            if (Auth::user()->role?->id_role ==60) {
-                return redirect()->route('gestion.dashboard');
-            }
+    if ($role == 90) {
+        return redirect()->route('admin.dashboard');
+    }
+    if ($role == 60) {
+        return redirect()->route('gestion.dashboard');
+    }
 
-            return redirect()->route('accueil');
-        }
+    return redirect()->route('accueil');
+}
+
 
         return back()->with('error', 'Email ou mot de passe incorrect.');
     }

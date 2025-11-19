@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Models\Pay;
@@ -10,9 +10,13 @@ use App\Models\Role;
 use Illuminate\Support\Facades\DB;
 class PageController extends Controller
 {
+    public function stockage(){
+    $roleUtilisateur = Auth::check() ? Auth::user()->role?->id_role : null;
+    }
     // --- Pages principales ---
     public function accueil(): View
     {
+        
         return view('accueil');
     }
 

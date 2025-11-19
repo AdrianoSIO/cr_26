@@ -25,8 +25,14 @@ class Engager extends BaseEngager
         return $this->belongsTo(Concour::class, 'id_concours');
     }
 
-    public function role()
+    public function engager()
     {
-        return $this->belongsTo(Role::class, 'id_role');
+        return $this->hasOne(Engager::class, 'id_utilisateur', 'id');
+    }
+
+    // Méthode pratique pour récupérer l'id_role via Engager
+    public function getRoleId(): ?int
+    {
+        return $this->engager?->id_role;
     }
 }

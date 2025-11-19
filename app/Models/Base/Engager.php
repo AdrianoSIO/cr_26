@@ -7,8 +7,8 @@
 namespace App\Models\Base;
 
 use App\Models\Concour;
-use App\Models\Role;
 use App\Models\Utilisateur;
+use App\Models\Role;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
@@ -47,10 +47,5 @@ class Engager extends Model
 	public function concour()
 	{
 		return $this->belongsTo(Concour::class, 'id_concours');
-	}
-
-	public function role()
-	{
-		return $this->belongsTo(Role::class, 'id_role');
 	}
 }
