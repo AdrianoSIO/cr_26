@@ -14,6 +14,7 @@
 <title>Gestion des Pays</title>
 <h1>Gestion des pays</h1>
 <p>Liste des pays enregistrés dans le système.</p>
+<div><center>
 <table>
     <thead>
         <tr>
@@ -41,6 +42,14 @@
         @endforeach
     </tbody>
 </table>
+<li class="navigation-item">
+
+  <button class="contrast">
+    <a href="{{ route('pay.ajout') }}">Ajouter un Pays</a>
+  </button>
+</li>
+<div>
+</center>
 
 <!-- Liens de pagination -->
 {{ $pays->links() }}

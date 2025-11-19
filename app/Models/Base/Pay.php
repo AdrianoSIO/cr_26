@@ -29,7 +29,11 @@ class Pay extends Model
 	protected $table = 'pays';
 	protected $primaryKey = 'code';
 	public $incrementing = false;
-
+	protected $fillable = [
+		'code',
+		'nom',
+		'commentaire'
+	];
 	public function colleges()
 	{
 

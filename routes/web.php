@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Procs;
 
 // Menu principal
@@ -16,17 +17,18 @@ Route::get('classement', [PageController::class, 'classement'])->name('classemen
 Route::get('/genre', [PageController::class, 'genre'])->name('genre');
 Route::get('/pays', [PageController::class, 'pays'])->name('pays');
 // Pays - CRUD
-Route::get('/pays/creation', [Procs::class, 'createPay'])->name('pay.create');
-Route::get('/pays/{pay}/edit', [Procs::class, 'editPay'])->name('pay.edit');
-Route::put('/pays/{pay}', [Procs::class, 'MajPay'])->name('pay.update');
+Route::get('/pay/ajout', [Procs::class, 'Formulaire'])->name('pay.create');
+Route::post('/pay/ajout', [Procs::class, 'createPay'])->name('pay.ajout');
+Route::get('/pay/{pay}/edit', [Procs::class, 'editPay'])->name('pay.edit');
+Route::put('/pay/{pay}', [Procs::class, 'MajPay'])->name('pay.update');
 Route::delete('/pays/{pay}', [Procs::class, 'SuppPay'])->name('pay.suppression');
 // Role _ CRUD
-Route::get('/role/creation', [Procs::class, 'createRole'])->name('role.create');
+Route::post('/role/creation', [Procs::class, 'createRole'])->name('role.create');
 Route::get('/role/{role}/edit', [Procs::class, 'editRole'])->name('role.edit');
 Route::put('/role/{role}', [Procs::class, 'MajRole'])->name('role.update');
 Route::delete('/role/{role}', [Procs::class, 'SuppRole'])->name('role.suppression');
 // Genre - CRUD
-Route::get('/genre/creation', [Procs::class, 'createGenre'])->name('genre.create');
+Route::post('/genre/creation', [Procs::class, 'createGenre'])->name('genre.create');
 Route::get('/genre/{genre}/edit', [Procs::class, 'editGenre'])->name('genre.edit');
 Route::put('/genre/{genre}', [Procs::class, 'MajGenre'])->name('genre.update');
 Route::delete('/genre/{genre}', [Procs::class, 'SuppGenre'])->name('genre.suppression');
@@ -42,7 +44,11 @@ Route::get('/admin/abonnement', [PageController::class, 'abonnement'])->name('ab
 Route::get('/roles', [PageController::class, 'roles'])->name('roles');
 // Utilisateurs et rôles
 Route::get('/utilisateurs', [PageController::class, 'utilisateurs'])->name('utilisateurs');
-
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
 
 // Résultat
 Route::get('/resultat/edition', [PageController::class, 'resultatEdition'])->name('resultat.edition');
