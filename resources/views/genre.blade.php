@@ -44,4 +44,9 @@
         @endforeach
     </tbody>
 </table>
+<div style="margin-top: 20px;">
+        <button class="contrast">
+            <a href="{{ route('genre.ajout') }}">Ajouter un Pays</a>
+        </button>
+    </div>
 @endsection

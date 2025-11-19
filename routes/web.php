@@ -17,22 +17,25 @@ Route::get('classement', [PageController::class, 'classement'])->name('classemen
 Route::get('/genre', [PageController::class, 'genre'])->name('genre');
 Route::get('/pays', [PageController::class, 'pays'])->name('pays');
 // Pays - CRUD
-Route::get('/pay/ajout', [Procs::class, 'Formulaire'])->name('pay.create');
+Route::get('/pay/ajout', [Procs::class, 'FormulaireAjout'])->name('pay.ajout.form');
 Route::post('/pay/ajout', [Procs::class, 'createPay'])->name('pay.ajout');
 Route::get('/pay/{pay}/edit', [Procs::class, 'editPay'])->name('pay.edit');
 Route::put('/pay/{pay}', [Procs::class, 'MajPay'])->name('pay.update');
 Route::delete('/pays/{pay}', [Procs::class, 'SuppPay'])->name('pay.suppression');
-// Role _ CRUD
-Route::post('/role/creation', [Procs::class, 'createRole'])->name('role.create');
+
+// Role - CRUD
+Route::get('/role/ajout', [Procs::class, 'FormulaireAjout'])->name('role.ajout.form');
+Route::post('/role/ajout', [Procs::class, 'createRole'])->name('role.ajout');
 Route::get('/role/{role}/edit', [Procs::class, 'editRole'])->name('role.edit');
 Route::put('/role/{role}', [Procs::class, 'MajRole'])->name('role.update');
 Route::delete('/role/{role}', [Procs::class, 'SuppRole'])->name('role.suppression');
+
 // Genre - CRUD
-Route::post('/genre/creation', [Procs::class, 'createGenre'])->name('genre.create');
+Route::get('/genre/ajout', [Procs::class, 'FormulaireAjout'])->name('genre.ajout.form');
+Route::post('/genre/ajout', [Procs::class, 'createGenre'])->name('genre.ajout');
 Route::get('/genre/{genre}/edit', [Procs::class, 'editGenre'])->name('genre.edit');
 Route::put('/genre/{genre}', [Procs::class, 'MajGenre'])->name('genre.update');
 Route::delete('/genre/{genre}', [Procs::class, 'SuppGenre'])->name('genre.suppression');
-
 
 // Épreuve
 Route::get('/epreuve', [PageController::class, 'epreuve'])->name('epreuve');

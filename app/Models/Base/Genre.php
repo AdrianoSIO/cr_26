@@ -29,7 +29,11 @@ class Genre extends Model
 	protected $table = 'genres';
 	protected $primaryKey = 'code';
 	public $incrementing = false;
-
+	protected $fillable = [
+		'code',
+		'nom',
+		'commentaire'
+	];
 	public function utilisateurs()
 	{
 		$Genres = Genre::simplepaginate(10);

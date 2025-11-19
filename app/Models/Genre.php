@@ -6,13 +6,13 @@ use App\Models\Base\Genre as BaseGenre;
 
 class Genre extends BaseGenre
 {
-    protected $fillable = ['nom', 'commentaire'];
+    protected $fillable = ['code','nom', 'commentaire'];
 
     // Clé primaire personnalisée
+
     protected $primaryKey = 'code';
     public $incrementing = false;
     protected $keyType = 'string';
-
     // Relation avec les utilisateurs
     public function utilisateurs()
     {

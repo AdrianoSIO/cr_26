@@ -1,19 +1,39 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Models\Pay;
 use App\Models\Role;
 use App\Models\Genre;
-
 class Procs extends Controller
 {
-    public function Formulaire()
+    public function FormulaireAjout(Request $request)
     {
-        return view('pay.ajout');
+        // Récupère le choix depuis l'URL (pay, role, genre, etc.)
+        $choix = $request->segment(1); // Prend le premier segment de l'URL
+        
+        // Mapping des entités vers leurs vues
+        $viewMapping = [
+            'pay' => 'pay.ajout',
+            'role' => 'role.ajout',
+            'genre' => 'genre.ajout',
+        ];
+        
+        // Vérifie si l'choix existe dans le mapping
+        if (array_key_exists($choix, $viewMapping)) {
+            $viewPath = $viewMapping[$choix];
+            
+            if (view()->exists($viewPath)) {
+                return view($viewPath);
+            }
+        }
+        
+        abort(404, "Formulaire non trouvé");
     }
+    
+    // Vos méthodes existantes...
+
     public function createPay(Request $request)
 {
     $validated = $request->validate([
@@ -51,18 +71,17 @@ class Procs extends Controller
     public function createRole(Request $request)
 {
     $validated = $request->validate([
-        'code' => 'required|string|max:10|unique:pays,code',
+        'code' => 'required|string|max:10|unique:roles,id',
         'nom' => 'required|string|max:255',
-        'commentaire' => 'nullable|string',
-        `created_at`=> now(),
-        `updated_at`=> now(),
+        'commentaire' => 'nullable|string'
     ]);
     
-    Pay::create($validated);
+    Role::create($validated);
     
-    return redirect()->route('pay.ajout')
-                     ->with('success', 'Pays ajouté avec succès !');
+    return redirect()->route('role.ajout.form')
+                     ->with('success', 'Rôle ajouté avec succès !');
 }
+
     public function editRole($role):View
     {
         $roleModel = Role::findOrFail($role);
@@ -83,17 +102,15 @@ class Procs extends Controller
     public function createGenre(Request $request)
 {
     $validated = $request->validate([
-        'code' => 'required|string|max:10|unique:pays,code',
+        'code' => 'required|string|max:1|unique:genres,code',
         'nom' => 'required|string|max:255',
-        'commentaire' => 'nullable|string',
-        `created_at`=> now(),
-        `updated_at`=> now(),
+        'commentaire' => 'nullable|string'
     ]);
     
-    Pay::create($validated);
+    Genre::create($validated);
     
-    return redirect()->route('pay.ajout')
-                     ->with('success', 'Pays ajouté avec succès !');
+    return redirect()->route('genre.ajout.form')
+                     ->with('success', 'Genre ajouté avec succès !');
 }
     // Afficher le formulaire d'édition
     public function editGenre(Genre $genre): View

@@ -15,9 +15,6 @@ $logout = action(function (Logout $logoutAction) {
             <span></span><span></span><span></span>
         </button>
     </div>
-    <ul class="nav-links" id="nav-links">
-        <li><a href="{{ route('accueil') }}">Accueil</a></li>
-        
 <script>
     const burger = document.getElementById('burger');
     const navLinks = document.getElementById('nav-links');

@@ -11,8 +11,8 @@ textarea {
 }
 </style>
 
-<title>Ajout de Genre</title>
-<h1>Ajouter un genre</h1>
+<title>Ajout de Rôle</title>
+<h1>Ajouter un rôle</h1>
 
 @if ($errors->any())
 <div class="alert alert-danger">
@@ -30,14 +30,14 @@ textarea {
 </div>
 @endif
 
-<form action="{{ route('genre.ajout') }}" method="POST">
+<form action="{{ route('role.ajout') }}" method="POST">
     @csrf
     
-    <label for="code">Code du Genre:</label>
-    <input type="text" id="code" name="code" value="{{ old('code') }}" maxlength="1" required>
+    <label for="code">Code du Rôle:</label>
+    <input type="text" id="code" name="code" value="{{ old('code') }}" required>
     <br>
     
-    <label for="nom">Nom du Genre:</label>
+    <label for="nom">Nom du Rôle:</label>
     <input type="text" id="nom" name="nom" value="{{ old('nom') }}" required>
     <br>
     
@@ -45,13 +45,13 @@ textarea {
     <textarea id="commentaire" name="commentaire">{{ old('commentaire') }}</textarea>
     <br>
     
-    <button type="submit" class="contrast">Ajouter le genre</button>
+    <button type="submit" class="contrast">Ajouter le rôle</button>
     <br>
 </form>
 
 <center>
     <button type="button" class="secondary">
-        <a href="{{ route('genre') }}">Retour à la liste</a>
+        <a href="{{ route('roles') }}">Retour à la liste</a>
     </button>
 </center>
 @endsection
