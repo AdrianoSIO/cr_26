@@ -14,8 +14,37 @@ main#main {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 0.5rem;
 }
+label {
+        display: block;
+        margin-bottom: 5px;
+        font-size: 0.9rem; /* plus petit que le texte normal */
+    }
+
+    input, textarea {
+        display: block;
+        margin-bottom: 10px;
+        font-size: 0.85rem; /* texte plus petit */
+        padding: 4px 6px;   /* réduit l’espace intérieur */
+        width: 25px;       /* réduit la largeur */
+    }
+
+    textarea {
+        width: 350px;
+        height: 150px;
+    }
+
+    button.contrast, button.secondary {
+        font-size: 0.85rem; /* boutons plus petits */
+        padding: 4px 8px;
+        margin-top: 5px;
+    }
+
+    button a {
+        text-decoration: none;
+        color: inherit;
+    }
 
 .navbar-brand {
     display: flex;
@@ -27,7 +56,7 @@ main#main {
     font-weight: bold;
     color: #fff;
     text-decoration: none;
-    font-size: 1.2rem;
+    font-size: 1rem;
 }
 
 /* --- Liens principaux --- */
@@ -103,12 +132,12 @@ main#main {
     cursor: pointer;
     display: none;
     flex-direction: column;
-    gap: 4px;
+    gap: 3px;
 }
 
 .burger span {
     display: block;
-    width: 25px;
+    width: 20px;
     height: 3px;
     background: white;
     border-radius: 2px;
@@ -151,10 +180,44 @@ footer {
     background-color: black;
     color: white;
     text-align: center;
-    padding: 1em 0;
+    padding: 0,5em 0;
     width: 100%;
 }
 
 .footer {
     color: white !important;
 }
+.login-container {
+        max-width: 400px;
+        margin: 60px auto;
+        padding: 25px;
+        border-radius: 10px;
+        background: #000000;
+        color: white;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+    }
+    .login-container h2 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    .login-container input, .login-container button {
+        width: 100%;
+        margin-top: 10px;
+    }
+    .login-container input {
+        padding: 10px;
+        border-radius: 5px;
+        border: none;
+    }
+    .login-container button {
+        background: #3b82f6;
+        color: white;
+        padding: 10px;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+    }
+    label, input, textarea {
+        display: block;
+        margin-bottom: 10px;
+    }

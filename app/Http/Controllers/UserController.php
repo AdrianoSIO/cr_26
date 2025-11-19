@@ -23,11 +23,11 @@ class UserController extends Controller
             $request->session()->regenerate();
 
             // Vérification du rôle
-            if (Auth::user()->role?->code === 'ADM') {
+            if (Auth::user()->role?->id_role == 90) {
                 return redirect()->route('admin.dashboard');
             }
 
-            if (Auth::user()->role?->code === 'GEST') {
+            if (Auth::user()->role?->id_role ==60) {
                 return redirect()->route('gestion.dashboard');
             }
 

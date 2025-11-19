@@ -2,7 +2,7 @@
 
 @section('title', 'Accueil')
 
-@section('content')
+@section('contenu')
 <section aria-labelledby="hero-title" style="margin-top:1rem">
         <article class="grid" style="align-items:center">
           <div>

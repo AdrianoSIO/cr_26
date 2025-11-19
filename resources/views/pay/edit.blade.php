@@ -1,14 +1,4 @@
 @extends('includes.default')
-<style>
-    label, input, textarea {
-        display: block;
-        margin-bottom: 10px;
-    }
-    textarea {
-        width: 350px;
-        height: 150px;
-    }
-</style>
 @section('contenu')
 <title>Modifier le Pays</title>
 <h1>Modifier le pays</h1>

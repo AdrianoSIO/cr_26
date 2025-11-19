@@ -1,34 +1,49 @@
 @extends('includes.default')
-
+@section('title', 'Pays')
 @section('contenu')
 <style>
-table, th, td {
-    border: 1px solid black;
+table {
+    width: 80%; /* élargir le tableau */
+    margin: 0 auto;
     border-collapse: collapse;
 }
+
 th, td {
-    padding: 10px;
-    min-width: 300px;
-    max-width: 100px;
+    border: 0.5px solid black;
+    padding: 8px; /* plus d'espace dans les cellules */
+    text-align: center;
+    min-width: 50px;
 }
-table {
-    margin: 0 auto;
+
+thead th {
+    background-color: #f0f0f0;
 }
+
 .centered-content {
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
+
 .actions-cell {
     display: flex;
-    gap: 10px;
+    gap: 5px;
     justify-content: center;
     align-items: center;
 }
-</style>
 
-<title>Gestion des Pays</title>
+/* Boutons plus petits */
+button.contrast, button.secondary {
+    padding: 4px 8px;  /* réduit la taille des boutons */
+    font-size: 0.85rem;
+}
+
+button a {
+    text-decoration: none;
+    color: inherit;
+}
+</style>
 
 <div class="centered-content">
     <h1>Gestion des pays</h1>
@@ -46,9 +61,9 @@ table {
         <tbody>
             @foreach($pays as $pay)
             <tr>
-                <td style="text-align: center;">{{ $pay->code }}</td>
-                <td style="text-align: center;">{{ $pay->nom }}</td>
-                <td style="text-align: center;">{{ $pay->commentaire }}</td>
+                <td >{{ $pay->code }}</td>
+                <td >{{ $pay->nom }}</td>
+                <td >{{ $pay->commentaire }}</td>
                 <td>
                     <div class="actions-cell">
                         <button class="contrast" type="button">
@@ -67,16 +82,15 @@ table {
         </tbody>
     </table>
     
-    <div style="margin-top: 20px;">
+    <div style="margin-top: 5px;" width="20%">
         <button class="contrast">
             <a href="{{ route('pay.ajout') }}">Ajouter un Pays</a>
         </button>
     </div>
     
     <!-- Liens de pagination -->
-    <div style="margin-top: 20px;">
+    <div style="margin-top: 10px;">
         {{ $pays->links() }}
     </div>
 </div>
-
 @endsection

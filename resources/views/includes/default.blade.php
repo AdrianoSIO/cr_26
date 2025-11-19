@@ -18,7 +18,7 @@
     </header>
 
     <main id="main" role="main">
-      @yield('content')
+      @yield('contenu')
     </main>
 
     @include('includes.footer')
