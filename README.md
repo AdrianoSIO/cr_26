@@ -32,20 +32,16 @@ Mais Je me suis occupé de la creation,consulation , mise à jour et la suppress
 
     De la table Genre donc l'ajout d'un rôle, sa supression, sa modification.
 
-    
-    
 
 🛠️ Technologies Utilisées
 
-Ce projet est construit sur une architecture robuste et moderne :
+Ce projet est construit sur une architecture robuste et moderne MVC:
 
     Backend : PHP avec le framework Laravel.
 
     Base de Données : (Configuration via .env.example, généralement MySQL ou PostgreSQL).
 
-    Frontend : HTML (avec moteur de templates Blade), CSS (majoritairement Tailwind CSS), et JavaScript pour l'interactivité.
-
-    Outils de Build : Vite pour l'environnement de développement et de production.
+    Frontend : HTML (avec moteur de templates Blade), CSS (majoritairement Tailwind CSS).
 
 ⚙️ Installation
 
