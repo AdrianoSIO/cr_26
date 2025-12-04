@@ -1,6 +1,9 @@
 🤖 Concours de Robots – Application de Gestion
 📌 Contexte
 
+    login : Prof@futaie.com
+    Mot de passe : Prof
+
 Ce projet est une application web dédiée à la gestion du concours de robots organisé annuellement entre plusieurs collèges des Deux-Sèvres, dans le cadre de l’enseignement de la technologie.
 
 L’objectif principal est de proposer une plateforme moderne, sécurisée et responsive permettant d’administrer entièrement le concours, depuis l’inscription des équipes jusqu’à la publication des résultats finaux.
