@@ -24,6 +24,11 @@ L'application couvre tous les aspects de la gestion du concours :
 
     Design Responsive : Optimisation pour une utilisation fluide sur ordinateur, tablette et smartphone.
 
+Mais Je me suis occupé de la creation,consulation , mise à jour et la suppression :
+
+    Des tables rôles donc l'ajout d'un rôle, sa supression, sa modification.
+    
+
 🛠️ Technologies Utilisées
 
 Ce projet est construit sur une architecture robuste et moderne :
@@ -70,8 +75,7 @@ npm install
 
 Configuration de l'environnement :
 
-    Créez le fichier .env en copiant l'exemple :
-    Bash
+    Copie de mon .env dans le .env exemple
 
 cp .env.example .env
 
@@ -99,7 +103,7 @@ Bash
 
     php artisan serve
 
-L'application sera accessible à l'adresse http://127.0.0.1:8000.
+L'application sera accessible à l'adresse communiqué après l'execution de l'installation
 
 👥 Rôles Utilisateurs
 
