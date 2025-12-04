@@ -1,121 +1,224 @@
-Concours de Robots - Application de Gestion
-
+🤖 Concours de Robots – Application de Gestion
 📌 Contexte
 
-Ce projet est une application web dédiée à la gestion du concours de robots organisé annuellement entre plusieurs collèges des Deux-Sèvres, dans le cadre de l'enseignement de technologie.
+Ce projet est une application web dédiée à la gestion du concours de robots organisé annuellement entre plusieurs collèges des Deux-Sèvres, dans le cadre de l’enseignement de la technologie.
 
-L'objectif principal est d'offrir une plateforme moderne, sécurisée et responsive pour administrer l'intégralité du concours, de l'inscription des équipes à la publication des résultats finaux.
+L’objectif principal est de proposer une plateforme moderne, sécurisée et responsive permettant d’administrer entièrement le concours, depuis l’inscription des équipes jusqu’à la publication des résultats finaux.
 
 🚀 Fonctionnalités principales
 
-L'application couvre tous les aspects de la gestion du concours :
+L’application gère tous les aspects du concours :
 
-    Inscriptions en ligne : Les équipes peuvent être inscrites par les professeurs de technologie de chaque collège.
+Inscriptions en ligne des équipes par les enseignants.
 
-    Gestion des épreuves : Administration complète des différentes épreuves, incluant la définition des barèmes et des coefficients.
+Gestion complète des épreuves avec définition des barèmes et coefficients.
 
-    Saisie des résultats : Interface dédiée pour la saisie rapide des notes par les secrétaires pendant l'événement.
+Saisie rapide des résultats par les secrétaires.
 
-    Consultation et Export : Accès aux résultats en temps réel et possibilité d'exporter les données au format tableur (CSV, ODS, XLS).
+Consultation des résultats en temps réel.
 
-    Classements dynamiques : Génération automatique des classements selon différentes catégories (Concours général, Esthétique, Site web, Meilleure équipe par collège).
+Export des données au format CSV, XLS et ODS.
 
-    Accès Public : Mise à disposition d'un espace public pour consulter les informations générales et les résultats finaux.
+Génération automatique des classements :
 
-    Design Responsive : Optimisation pour une utilisation fluide sur ordinateur, tablette et smartphone.
+Classement général
 
-Mais Je me suis occupé de la creation,consulation , mise à jour et la suppression :
+Esthétique
 
-    De la tables rôle donc l'ajout d'un rôle, sa supression, sa modification.
+Site web
 
-    De la table Pays donc l'ajout d'un rôle, sa supression, sa modification.
+Meilleure équipe par collège
 
-    De la table Genre donc l'ajout d'un rôle, sa supression, sa modification.
+Accès public aux informations générales.
+
+Interface responsive (ordinateur, tablette, mobile).
+
+👤 Travail réalisé personnellement
+
+Je me suis chargé des fonctionnalités CRUD (Créer, Lire, Modifier, Supprimer) pour les tables suivantes :
+
+Table rôle
+
+Création d’un rôle
+
+Modification
+
+Suppression
+
+Table pays
+
+Création
+
+Modification
+
+Suppression
+
+Table genre
+
+Création
+
+Modification
+
+Suppression
+
+🛠️ Technologies utilisées
+
+Le projet repose sur une architecture MVC moderne.
+
+Backend : PHP avec Laravel
+Frontend : Blade, HTML, CSS, Tailwind CSS
+Base de données : MySQL / PostgreSQL / SQLite
+Outils : Composer, Node.js, npm
+Versionning : GitHub
+
+⚙️ Installation complète (sur une machine vierge)
+
+Cette section explique comment lancer le projet sur un ordinateur ne disposant pas de Laravel, Composer ou configuration préalable.
+
+1️⃣ Installer les prérequis
+PHP
+
+Vérifier :
+
+php -v
 
 
-🛠️ Technologies Utilisées
+Installer PHP si nécessaire : https://www.php.net/downloads
 
-Ce projet est construit sur une architecture robuste et moderne MVC:
 
-    Backend : PHP avec le framework Laravel.
+Version recommandée : PHP 8.1 ou plus.
 
-    Base de Données : (Configuration via .env.example, généralement MySQL ou PostgreSQL).
+Composer
 
-    Frontend : HTML (avec moteur de templates Blade), CSS (majoritairement Tailwind CSS).
+Vérifier :
 
-⚙️ Installation
+composer -V
 
-Suivez ces étapes pour installer et lancer l'application en local.
 
-Prérequis
+Installer : https://getcomposer.org/download/
 
-    PHP (version compatible avec Laravel)
+Node.js et npm
 
-    Composer
+Vérifier :
 
-    Node.js et npm/yarn
+node -v
+npm -v
 
-    Une base de données (ex : MySQL, SQLite, PostgreSQL)
 
-Étapes
+Installer : https://nodejs.org
 
-    Cloner le dépôt :
-    Bash
+(version LTS recommandée)
 
+Git
+
+Vérifier :
+
+git --version
+
+
+Installer : https://git-scm.com/
+
+Base de données
+
+Installez l’une de ces bases :
+
+MySQL / MariaDB
+
+PostgreSQL
+
+SQLite (plus simple pour débuter)
+
+2️⃣ Cloner le projet GitHub
 git clone https://github.com/AdrianoSIO/cr_26.git
 cd cr_26
 
-Installer les dépendances PHP :
-Bash
-
+3️⃣ Installer les dépendances
+PHP (Backend)
 composer install
 
-Installer les dépendances Frontend :
-Bash
-
+Frontend
 npm install
 
-Configuration de l'environnement :
+4️⃣ Configuration de Laravel
 
-    Copie de mon .env dans le .env exemple
+Copier le fichier d’environnement :
 
 cp .env.example .env
 
-Générez une clé d'application :
-Bash
 
-    php artisan key:generate
+Générer la clé Laravel :
 
-    Modifiez le fichier .env pour configurer l'accès à votre base de données (DB_*).
+php artisan key:generate
 
-Exécuter les migrations et le seeder (si existant) :
-Bash
+5️⃣ Configuration de la base de données
 
+Modifier le fichier .env
+
+Exemple pour MySQL :
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=robot
+DB_USERNAME=root
+DB_PASSWORD=
+
+
+Créer la base de données avant de continuer.
+
+OU avec SQLite :
+touch database/database.sqlite
+
+
+Dans .env :
+
+DB_CONNECTION=sqlite
+DB_DATABASE=/chemin/absolu/cr_26/database/database.sqlite
+
+6️⃣ Créer les tables
 php artisan migrate --seed
 
-Compiler les assets :
-Bash
+7️⃣ Compiler le front
 
-npm run dev  # Pour le développement
-# ou
-npm run build # Pour la production
+Développement :
 
-Lancer le serveur de développement Laravel :
-Bash
+npm run dev
 
-    php artisan serve
 
-L'application sera accessible à l'adresse communiqué après l'execution de l'installation
+Production :
 
-👥 Rôles Utilisateurs
+npm run build
 
-Le système gère un ensemble de rôles utilisateurs pour assurer la sécurité et la séparation des responsabilités :
-Rôle	Accès et Responsabilités
-Administrateur	Tous les droits sur l'application (Super-utilisateur).
-Gestionnaire	Supervision générale, modification des notes, édition des résultats, gestion des utilisateurs.
-Secrétaire	Saisie des notes et des résultats pendant les épreuves.
-Jury	Évaluation spécifique des épreuves (ex: esthétique, site web).
-Enseignant	Inscription des équipes de son collège et suivi de leur progression.
-Élève	Membre d'équipe (si authentification spécifique) ou rôle de support (Jury/Secrétaire simplifié).
-Abonné	Accès en lecture seule à certaines sections.
-Visiteur	Consultation publique des informations générales et des résultats finaux.
+8️⃣ Démarrer le serveur
+php artisan serve
+
+
+Accéder à l’application :
+http://127.0.0.1:8000
+
+✅ Le projet est fonctionnel en local.
+
+👥 Rôles utilisateurs
+
+Administrateur : tous les droits
+
+Gestionnaire : supervision générale
+
+Secrétaire : saisie des notes
+
+Jury : évaluation des épreuves
+
+Enseignant : gestion des équipes
+
+Élève : participation
+
+Visiteur : consultation publique
+
+🧰 Commandes utiles
+php artisan serve               # Lancer le serveur
+php artisan migrate:fresh --seed # Réinitialiser la base
+php artisan optimize:clear      # Nettoyer le cache
+php artisan route:list          # Voir les routes
+
+🎯 Objectif pédagogique
+
+Ce projet a pour but de développer des compétences en développement web professionnel, base de données, travail collaboratif et architecture MVC avec Laravel.
