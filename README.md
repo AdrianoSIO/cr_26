@@ -26,7 +26,13 @@ L'application couvre tous les aspects de la gestion du concours :
 
 Mais Je me suis occupé de la creation,consulation , mise à jour et la suppression :
 
-    Des tables rôles donc l'ajout d'un rôle, sa supression, sa modification.
+    De la tables rôle donc l'ajout d'un rôle, sa supression, sa modification.
+
+    De la table Pays donc l'ajout d'un rôle, sa supression, sa modification.
+
+    De la table Genre donc l'ajout d'un rôle, sa supression, sa modification.
+
+    
     
 
 🛠️ Technologies Utilisées
