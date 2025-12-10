@@ -77,9 +77,11 @@ button a {
         @endforeach
     </tbody>
 </table>
-<div style="margin-top: 20px;">
+
+    <div style="margin-top: 5px;" width="20%">
         <button class="contrast">
-            <a href="{{ route('genre.ajout') }}">Ajouter un Genre</a>
+            <a href="{{ route('genre.ajout') }}">Ajouter un genre</a>
         </button>
     </div>
+</div>
 @endsection

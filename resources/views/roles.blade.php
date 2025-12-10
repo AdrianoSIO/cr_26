@@ -44,8 +44,8 @@ button a {
 }
 </style>
 <div class="centered-content">
-    <h1>Gestion des pays</h1>
-    <p>Liste des pays enregistrés dans le système.</p>
+    <h1>Gestion des roles</h1>
+    <p>Liste des rôles enregistrés dans le système. Pouvant être attribué</p>
     
     <table>
         <thead>
@@ -86,10 +86,12 @@ button a {
         @endforeach
     </tbody>
 </table>
-</div>
-<div style="margin-top: 20px;">
+
+    <div style="margin-top: 5px;" width="20%">
         <button class="contrast">
             <a href="{{ route('role.ajout') }}">Ajouter un Role</a>
         </button>
     </div>
+</div>
+</div>
 @endsection
