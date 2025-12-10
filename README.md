@@ -1,121 +1,378 @@
-Concours de Robots - Application de Gestion
+# 🤖 Concours de Robots – Documentation Technique
 
-📌 Contexte
+## 📌 Présentation
 
-Ce projet est une application web dédiée à la gestion du concours de robots organisé annuellement entre plusieurs collèges des Deux-Sèvres, dans le cadre de l'enseignement de technologie.
+Application web de gestion du concours de robots annuel entre collèges des Deux-Sèvres. Plateforme complète pour l'administration du concours, de l'inscription jusqu'aux résultats finaux.
 
-L'objectif principal est d'offrir une plateforme moderne, sécurisée et responsive pour administrer l'intégralité du concours, de l'inscription des équipes à la publication des résultats finaux.
+**Identifiants de test** : `Prof@futaie.com` / `Prof`
 
-🚀 Fonctionnalités principales
+---
 
-L'application couvre tous les aspects de la gestion du concours :
+## 🚀 Installation rapide
 
-    Inscriptions en ligne : Les équipes peuvent être inscrites par les professeurs de technologie de chaque collège.
+### Prérequis (déjà installés)
+- PHP 8.1+
+- Composer
+- Node.js & npm
+- MySQL
+- Git
 
-    Gestion des épreuves : Administration complète des différentes épreuves, incluant la définition des barèmes et des coefficients.
+### Installation en 5 étapes
 
-    Saisie des résultats : Interface dédiée pour la saisie rapide des notes par les secrétaires pendant l'événement.
-
-    Consultation et Export : Accès aux résultats en temps réel et possibilité d'exporter les données au format tableur (CSV, ODS, XLS).
-
-    Classements dynamiques : Génération automatique des classements selon différentes catégories (Concours général, Esthétique, Site web, Meilleure équipe par collège).
-
-    Accès Public : Mise à disposition d'un espace public pour consulter les informations générales et les résultats finaux.
-
-    Design Responsive : Optimisation pour une utilisation fluide sur ordinateur, tablette et smartphone.
-
-Mais Je me suis occupé de la creation,consulation , mise à jour et la suppression :
-
-    De la tables rôle donc l'ajout d'un rôle, sa supression, sa modification.
-
-    De la table Pays donc l'ajout d'un rôle, sa supression, sa modification.
-
-    De la table Genre donc l'ajout d'un rôle, sa supression, sa modification.
-
-
-🛠️ Technologies Utilisées
-
-Ce projet est construit sur une architecture robuste et moderne MVC:
-
-    Backend : PHP avec le framework Laravel.
-
-    Base de Données : (Configuration via .env.example, généralement MySQL ou PostgreSQL).
-
-    Frontend : HTML (avec moteur de templates Blade), CSS (majoritairement Tailwind CSS).
-
-⚙️ Installation
-
-Suivez ces étapes pour installer et lancer l'application en local.
-
-Prérequis
-
-    PHP (version compatible avec Laravel)
-
-    Composer
-
-    Node.js et npm/yarn
-
-    Une base de données (ex : MySQL, SQLite, PostgreSQL)
-
-Étapes
-
-    Cloner le dépôt :
-    Bash
-
+```bash
+# 1. Cloner le projet
 git clone https://github.com/AdrianoSIO/cr_26.git
 cd cr_26
 
-Installer les dépendances PHP :
-Bash
-
+# 2. Installer les dépendances
 composer install
-
-Installer les dépendances Frontend :
-Bash
-
 npm install
 
-Configuration de l'environnement :
-
-    Copie de mon .env dans le .env exemple
-
+# 3. Configuration Laravel
 cp .env.example .env
+php artisan key:generate
 
-Générez une clé d'application :
-Bash
+# 4. Configurer la base de données
+# Éditez .env avec vos paramètres MySQL :
+# DB_DATABASE=robot
+# DB_USERNAME=root
+# DB_PASSWORD=votre_mot_de_passe
 
-    php artisan key:generate
+# Créer la base de données
+mysql -u root -p -e "CREATE DATABASE robot;"
 
-    Modifiez le fichier .env pour configurer l'accès à votre base de données (DB_*).
-
-Exécuter les migrations et le seeder (si existant) :
-Bash
-
+# 5. Initialiser et lancer
 php artisan migrate --seed
+npm run dev & php artisan serve
+```
 
-Compiler les assets :
-Bash
+🎉 **Accès** : http://127.0.0.1:8000
 
-npm run dev  # Pour le développement
-# ou
-npm run build # Pour la production
+---
 
-Lancer le serveur de développement Laravel :
-Bash
+## 🏗️ Architecture technique
 
-    php artisan serve
+### Stack technologique
+- **Backend** : Laravel (PHP)
+- **Frontend** : Blade, HTML, CSS
+- **BDD** : MySQL
+- **Build** : Vite
+- **Versionning** : Git/GitHub
 
-L'application sera accessible à l'adresse communiqué après l'execution de l'installation
+### Structure MVC
 
-👥 Rôles Utilisateurs
+```
+app/
+├── Http/Controllers/     # Logique métier
+├── Models/              # Entités de données
+└── Policies/            # Autorisations
 
-Le système gère un ensemble de rôles utilisateurs pour assurer la sécurité et la séparation des responsabilités :
-Rôle	Accès et Responsabilités
-Administrateur	Tous les droits sur l'application (Super-utilisateur).
-Gestionnaire	Supervision générale, modification des notes, édition des résultats, gestion des utilisateurs.
-Secrétaire	Saisie des notes et des résultats pendant les épreuves.
-Jury	Évaluation spécifique des épreuves (ex: esthétique, site web).
-Enseignant	Inscription des équipes de son collège et suivi de leur progression.
-Élève	Membre d'équipe (si authentification spécifique) ou rôle de support (Jury/Secrétaire simplifié).
-Abonné	Accès en lecture seule à certaines sections.
-Visiteur	Consultation publique des informations générales et des résultats finaux.
+resources/
+├── views/               # Templates Blade
+└── css/js/              # Assets frontend
+
+database/
+├── migrations/          # Schémas de tables
+└── seeders/            # Données de test
+
+routes/
+└── web.php             # Définition des routes
+```
+
+---
+
+## 📊 Modèle de données
+
+### Tables principales
+
+#### Utilisateurs et authentification
+- **users** : Comptes utilisateurs
+- **roles** : Rôles système (Admin, Enseignant, Élève...)
+- **genres** : Genres (M/F/Autre)
+- **pays** : Référentiel pays
+
+#### Gestion du concours
+- **colleges** : Établissements participants
+- **equipes** : Équipes de compétition
+- **epreuves** : Épreuves du concours
+- **resultats** : Scores et performances
+- **classements** : Résultats calculés
+
+### Relations clés
+```
+User → Role (1:N)
+Equipe → College (N:1)
+Equipe → User (N:N) [équipe_user]
+Resultat → Equipe (N:1)
+Resultat → Epreuve (N:1)
+```
+
+---
+
+## 🔐 Système d'autorisation
+
+### Rôles et permissions
+
+| Rôle | Accès | Permissions |
+|------|-------|-------------|
+| **Administrateur** | Complet | Gestion totale de la plateforme |
+| **Gestionnaire** | Étendu | Supervision concours et équipes |
+| **Secrétaire** | Modéré | Saisie des résultats |
+| **Jury** | Limité | Évaluation des épreuves |
+| **Enseignant** | Standard | Gestion de ses équipes |
+| **Élève** | Restreint | Consultation de son équipe |
+| **Visiteur** | Public | Consultation résultats publics |
+
+### Middleware d'authentification
+```php
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    // Routes admin uniquement
+});
+```
+
+---
+
+## 🛣️ Routing et navigation
+
+### Routes publiques
+```
+GET  /                  # Page d'accueil
+GET  /resultats         # Résultats publics
+GET  /classement        # Classements généraux
+```
+
+### Routes authentifiées
+```
+GET  /dashboard         # Tableau de bord
+GET  /equipes           # Gestion équipes
+POST /equipes           # Créer équipe
+GET  /resultats/saisie  # Interface saisie notes
+```
+
+### Routes CRUD (exemple : rôles)
+```
+GET    /roles           # Liste
+GET    /roles/create    # Formulaire création
+POST   /roles           # Enregistrer
+GET    /roles/{id}/edit # Formulaire édition
+PUT    /roles/{id}      # Mettre à jour
+DELETE /roles/{id}      # Supprimer
+```
+
+---
+
+## 🎨 Interface utilisateur
+
+### Pages principales
+
+#### `/dashboard` - Tableau de bord
+- **Rôle** : Tous (authentifiés)
+- **Affichage** : Statistiques personnalisées selon le rôle
+- **Composants** : Cards de résumé, graphiques, accès rapides
+
+#### `/equipes` - Gestion des équipes
+- **Rôle** : Enseignant, Admin
+- **Fonctionnalités** :
+  - Liste des équipes avec filtres
+  - Création/modification d'équipe
+  - Affectation des membres
+  - Upload logo équipe
+
+#### `/epreuves` - Configuration épreuves
+- **Rôle** : Admin, Gestionnaire
+- **Fonctionnalités** :
+  - Définition des épreuves
+  - Barèmes et coefficients
+  - Critères d'évaluation
+
+#### `/resultats/saisie` - Saisie des notes
+- **Rôle** : Secrétaire, Jury
+- **Fonctionnalités** :
+  - Interface de saisie rapide
+  - Validation en temps réel
+  - Historique des modifications
+
+#### `/classements` - Résultats et classements
+- **Rôle** : Public
+- **Fonctionnalités** :
+  - Classement général
+  - Classement par catégorie (Esthétique, Site web)
+  - Meilleure équipe par collège
+  - Export CSV/XLS/ODS
+
+#### `/admin/roles` - Gestion des rôles
+- **Rôle** : Admin
+- **Fonctionnalités** : CRUD complet sur les rôles
+
+#### `/admin/pays` - Gestion des pays
+- **Rôle** : Admin
+- **Fonctionnalités** : CRUD complet sur le référentiel pays
+
+#### `/admin/genres` - Gestion des genres
+- **Rôle** : Admin
+- **Fonctionnalités** : CRUD complet sur les genres
+
+---
+
+## 💾 Gestion des données
+
+### Migrations
+```bash
+# Créer une migration
+php artisan make:migration create_table_name
+
+# Exécuter les migrations
+php artisan migrate
+
+# Rollback
+php artisan migrate:rollback
+
+# Reset complet
+php artisan migrate:fresh --seed
+```
+
+### Seeders
+```bash
+# Créer un seeder
+php artisan make:seeder TableNameSeeder
+
+# Exécuter les seeders
+php artisan db:seed
+php artisan db:seed --class=SpecificSeeder
+```
+
+### Exports
+Formats supportés :
+- **CSV** : Export standard
+- **XLS** : Excel classique
+- **ODS** : LibreOffice
+
+---
+
+## 🔧 Commandes de développement
+
+### Serveur
+```bash
+php artisan serve              # Démarrer sur :8000
+php artisan serve --port=8080  # Port personnalisé
+```
+
+### Cache
+```bash
+php artisan optimize:clear     # Nettoyer tout
+php artisan config:clear       # Config
+php artisan route:clear        # Routes
+php artisan view:clear         # Vues
+```
+
+### Base de données
+```bash
+php artisan migrate:fresh --seed  # Reset + données test
+php artisan db:seed               # Données uniquement
+```
+
+### Assets frontend
+```bash
+npm run dev     # Mode développement (watch)
+npm run build   # Compilation production
+```
+
+### Génération de code
+```bash
+php artisan make:controller NameController
+php artisan make:model Name -m
+php artisan make:migration create_table
+php artisan make:seeder NameSeeder
+php artisan make:policy NamePolicy
+```
+
+---
+
+## 📦 Dépendances principales
+
+### Backend (Composer)
+```json
+{
+  "laravel/framework": "^10.0",
+  "laravel/sanctum": "^3.0",
+  "laravel/tinker": "^2.8"
+}
+```
+
+### Frontend (NPM)
+```json
+{
+  "vite": "^4.0",
+  "laravel-vite-plugin": "^0.7"
+}
+```
+
+---
+
+## 🐛 Dépannage rapide
+
+### Erreur "Class not found"
+```bash
+composer dump-autoload
+```
+
+### Erreur permissions (Linux/Mac)
+```bash
+chmod -R 775 storage bootstrap/cache
+```
+
+### Page blanche / 500
+```bash
+php artisan optimize:clear
+```
+
+### Assets non chargés
+```bash
+npm run build
+php artisan view:clear
+```
+
+---
+
+## 👨‍💻 Développement réalisé (Personnel)
+
+### Fonctionnalités CRUD implémentées
+
+#### Module Rôles (`/admin/roles`)
+- ✅ Liste avec pagination
+- ✅ Création de rôle
+- ✅ Modification
+- ✅ Suppression sécurisée
+- ✅ Validation des données
+
+#### Module Pays (`/admin/pays`)
+- ✅ Référentiel complet
+- ✅ CRUD standard
+- ✅ Recherche et filtres
+
+#### Module Genres (`/admin/genres`)
+- ✅ Gestion des genres
+- ✅ CRUD complet
+- ✅ Interface responsive
+
+---
+
+## 🎯 Fonctionnalités clés
+
+- ✅ Authentification multi-rôles
+- ✅ Inscription en ligne des équipes
+- ✅ Gestion complète des épreuves
+- ✅ Saisie rapide des résultats
+- ✅ Calcul automatique des classements
+- ✅ Exports multiformats (CSV/XLS/ODS)
+- ✅ Interface responsive
+- ✅ Consultation temps réel
+- ✅ Accès public sécurisé
+
+---
+
+## 📞 Support
+
+**Repository** : [github.com/AdrianoSIO/cr_26](https://github.com/AdrianoSIO/cr_26)
+
+**Issues** : Ouvrir un ticket sur GitHub pour tout bug ou suggestion.
