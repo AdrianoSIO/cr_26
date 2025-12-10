@@ -3,9 +3,6 @@
 ## 📌 Présentation
 
 Application web de gestion du concours de robots annuel entre collèges des Deux-Sèvres. Plateforme complète pour l'administration du concours, de l'inscription jusqu'aux résultats finaux.
-
-**Identifiants de test** : `Prof@futaie.com` / `Prof`
-
 ---
 
 ## 🚀 Installation rapide
