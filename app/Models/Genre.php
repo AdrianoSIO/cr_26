@@ -2,25 +2,32 @@
 
 namespace App\Models;
 
-use App\Models\Base\Genre as BaseGenre;
+use Illuminate\Database\Eloquent\Model;
 
-class Genre extends BaseGenre
+class Genre extends Model
 {
-    protected $fillable = ['code','nom', 'commentaire'];
+    protected $table = 'genres';  // nom de ta table
+    protected $primaryKey = 'code';    // clé primaire personnalisée
+    public $incrementing = false;      // ce n'est pas auto-incrément
+    protected $keyType = 'string';     // la clé est une string
 
-    // Clé primaire personnalisée
+    protected $fillable = ['code', 'nom', 'commentaire'];
 
-    protected $primaryKey = 'code';
-    public $incrementing = false;
-    protected $keyType = 'string';
     // Relation avec les utilisateurs
     public function utilisateurs()
     {
-        // hasMany(RelatedModel, foreign_key_in_utilisateurs, local_key_in_genres)
-        return $this->hasMany(\App\Models\Utilisateur::class, 'code_genre', 'code');
+        return $this->hasMany(Utilisateur::class, 'code_genre', 'code');
     }
+
+    // Relation avec les engagers
     public function engagers()
     {
-        return $this->hasMany(Engager::class, 'id_genre');
+        return $this->hasMany(Engager::class, 'id_genre', 'code');
+    }
+
+    // Binding par code pour les routes
+    public function getRouteKeyName()
+    {
+        return 'code';
     }
 }

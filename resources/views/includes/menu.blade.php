@@ -10,7 +10,7 @@ $logout = action(function (Logout $logoutAction) {
 ?>
 @php
     $roleId = Auth::check() ? Auth::user()->getRoleId() : null;
-    print_r($roleId);
+    
 @endphp
 
 <nav class="navbar">

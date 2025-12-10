@@ -8,6 +8,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Middleware\isAdmin;
 
 // Menu principal
+Route::get('/', [PageController::class, 'accueil'])->name('accueil');
 Route::get('/accueil', [PageController::class, 'accueil'])->name('accueil');
 
 // Classement
@@ -45,9 +46,14 @@ Route::middleware([IsAdmin::class])->group(function () {
     // GENRE - CRUD
     Route::get('/genre/ajout', [Procs::class, 'FormulaireAjout'])->name('genre.ajout.form');
     Route::post('/genre/ajout', [Procs::class, 'createGenre'])->name('genre.ajout');
+
+    // Edition et mise à jour par code
     Route::get('/genre/{genre}/edit', [Procs::class, 'editGenre'])->name('genre.edit');
     Route::put('/genre/{genre}', [Procs::class, 'MajGenre'])->name('genre.update');
+
+   // Suppression
     Route::delete('/genre/{genre}', [Procs::class, 'SuppGenre'])->name('genre.suppression');
+
 
     // Pages Admin
     Route::get('/admin/edition', [PageController::class, 'edition'])->name('edition');

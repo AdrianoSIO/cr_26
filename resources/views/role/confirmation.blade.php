@@ -60,20 +60,20 @@
 </style>
 
 <div class="confirmation-container">
-    <h2>Suppression du genre : {{ $genreModel->nom }}</h2>
+    <h2>Suppression du role : {{ $roleModel->nom }}</h2>
 
     @if($utilisateursCount > 0)
-        <p>Attention ! <strong>{{ $utilisateursCount }}</strong> utilisateur(s) sont liés à ce genre.</p>
-        <form method="POST" action="{{ route('genre.suppression', $genreModel->id) }}">
+        <p>Attention ! <strong>{{ $utilisateursCount }}</strong> utilisateur(s) sont liés à ce role.</p>
+        <form method="POST" action="{{ route('role.suppression', $roleModel->id) }}">
             @csrf
             @method('DELETE')
 
             <button type="submit" name="action" value="delete_users" class="btn-delete">
-                Supprimer le genre et les utilisateurs
+                Supprimer le role et les utilisateurs
             </button>
 
             <button type="submit" name="action" value="keep_users" class="btn-keep">
-                Supprimer le genre, laisser les utilisateurs sans genre
+                Supprimer le role, laisser les utilisateurs sans role
             </button>
 
             <button type="submit" name="action" value="cancel" class="btn-cancel">
@@ -81,8 +81,8 @@
             </button>
         </form>
     @else
-        <p>Ce genre n'est lié à aucun utilisateur. Voulez-vous le supprimer ?</p>
-        <form method="POST" action="{{ route('genre.suppression', $genreModel->id) }}">
+        <p>Ce role n'est lié à aucun utilisateur. Voulez-vous le supprimer ?</p>
+        <form method="POST" action="{{ route('role.suppression', $roleModel->id) }}">
             @csrf
             @method('DELETE')
 

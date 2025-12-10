@@ -7,6 +7,7 @@ use App\Models\Pay;
 use App\Models\Genre;
 use App\Models\Role;
 use App\Models\Utilisateur;
+use App\Models\Engager;
 use App\Models\User; // pour gérer les engagers liés aux rôles
 
 class Procs extends Controller
@@ -55,6 +56,10 @@ class Procs extends Controller
     {
         $payModel = Pay::findOrFail($pay);
         return view('pay.edit', compact('payModel'));
+    }
+    public function getGenre()
+    {
+        return 'genre';
     }
 
     public function MajPay(Request $request, $pay)
@@ -171,24 +176,26 @@ class Procs extends Controller
         $validated = $request->validate([
             'code' => 'required|string|max:1|unique:genres,code',
             'nom' => 'required|string|max:255',
-            'commentaire' => 'nullable|string',
+            'commentaire' => 'nullable|string|max:500',
         ]);
 
         Genre::create($validated);
 
         return redirect()->route('genre.ajout.form')
-            ->with('success', 'Genre ajouté avec succès !');
+                         ->with('success', 'Genre ajouté avec succès !');
     }
 
-    public function editGenre(Genre $genre): View
+    // Éditer un genre
+    public function editGenre(Genre $genre)
     {
         return view('genre.edit', compact('genre'));
     }
 
+    // Mettre à jour un genre
     public function MajGenre(Request $request, Genre $genre)
     {
         $validated = $request->validate([
-            'code' => 'required|string|max:1|unique:genres,code,' . $genre->id,
+            'code' => 'required|string|max:1|unique:genres,code,' . $genre->code . ',code',
             'nom' => 'required|string|max:255',
             'commentaire' => 'nullable|string|max:500',
         ]);
@@ -196,55 +203,38 @@ class Procs extends Controller
         $genre->update($validated);
 
         return redirect()->route('genre')
-            ->with('success', 'Genre mis à jour avec succès');
-    }
-    public function SuppGenre(Request $request, $genreId)
-{
-    $genre = Genre::findOrFail($genreId);
-
-    // Récupérer les utilisateurs liés à ce genre
-    $userIds = Utilisateur::where('code_genre', $genre->code)->pluck('id');
-    $utilisateursCount = $userIds->count();
-
-    // Afficher le formulaire de confirmation si aucune action n'a été choisie
-    if (!$request->has('action')) {
-        return view('genre.confirmation', [
-            'genreModel' => $genre,
-            'utilisateursCount' => $utilisateursCount
-        ]);
+                         ->with('success', 'Genre mis à jour avec succès');
     }
 
-    switch ($request->input('action')) {
+    // Supprimer un genre avec confirmation
+    public function SuppGenre(Request $request, Genre $genre)
+    {
+        $userIds = Utilisateur::where('code_genre', $genre->code)->pluck('id');
+        $utilisateursCount = $userIds->count();
 
-        case 'delete_users':
-            // Supprimer d'abord les engagers liés à ces utilisateurs
-            \App\Models\Engager::whereIn('id_utilisateur', $userIds)->delete();
+        if (!$request->has('action')) {
+            return view('genre.confirmation', [
+                'genreModel' => $genre,
+                'utilisateursCount' => $utilisateursCount
+            ]);
+        }
 
-            // Supprimer les utilisateurs
-            Utilisateur::whereIn('id', $userIds)->delete();
-
-            // Supprimer le genre
-            $genre->delete();
-
-            return redirect()->route('genre.ajout.form')
-                ->with('success', 'Genre et utilisateurs supprimés avec succès.');
-
-        case 'keep_users':
-            // Dissocier le genre pour les utilisateurs
-            Utilisateur::whereIn('id', $userIds)
-                       ->update(['code_genre' => null]);
-
-            // Supprimer le genre
-            $genre->delete();
-
-            return redirect()->route('genre.ajout.form')
-                ->with('success', 'Genre supprimé, les utilisateurs restent sans genre.');
-
-        case 'cancel':
-        default:
-            return redirect()->route('genre.ajout.form')
-                ->with('info', 'Suppression annulée.');
+        switch ($request->input('action')) {
+            case 'delete_users':
+                Engager::whereIn('id_utilisateur', $userIds)->delete();
+                Utilisateur::whereIn('id', $userIds)->delete();
+                $genre->delete();
+                return redirect()->route('genre')
+                                 ->with('success', 'Genre et utilisateurs supprimés avec succès.');
+            case 'keep_users':
+                Utilisateur::whereIn('id', $userIds)->update(['code_genre' => null]);
+                $genre->delete();
+                return redirect()->route('genre')
+                                 ->with('success', 'Genre supprimé, les utilisateurs restent sans genre.');
+            case 'cancel':
+            default:
+                return redirect()->route('genre')
+                                 ->with('info', 'Suppression annulée.');
+        }
     }
-}
-
 }

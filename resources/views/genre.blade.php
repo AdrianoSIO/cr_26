@@ -79,7 +79,7 @@ button a {
 </table>
 <div style="margin-top: 20px;">
         <button class="contrast">
-            <a href="{{ route('genre.ajout') }}">Ajouter un Pays</a>
+            <a href="{{ route('genre.ajout') }}">Ajouter un Genre</a>
         </button>
     </div>
 @endsection
