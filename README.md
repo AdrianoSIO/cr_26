@@ -29,7 +29,7 @@ npm install
 cp .env.example .env
 php artisan key:generate
 
-# 4. Configurer la base de données
+# 4. Configurer la base de données ( exemple de .env dans .env exemple
 # Éditez .env avec vos paramètres MySQL :
 # DB_DATABASE=robot
 # DB_USERNAME=root
@@ -134,16 +134,6 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 ### Routes publiques
 ```
 GET  /                  # Page d'accueil
-GET  /resultats         # Résultats publics
-GET  /classement        # Classements généraux
-```
-
-### Routes authentifiées
-```
-GET  /dashboard         # Tableau de bord
-GET  /equipes           # Gestion équipes
-POST /equipes           # Créer équipe
-GET  /resultats/saisie  # Interface saisie notes
 ```
 
 ### Routes CRUD (exemple : rôles)
@@ -160,43 +150,7 @@ DELETE /roles/{id}      # Supprimer
 
 ## 🎨 Interface utilisateur
 
-### Pages principales
-
-#### `/dashboard` - Tableau de bord
-- **Rôle** : Tous (authentifiés)
-- **Affichage** : Statistiques personnalisées selon le rôle
-- **Composants** : Cards de résumé, graphiques, accès rapides
-
-#### `/equipes` - Gestion des équipes
-- **Rôle** : Enseignant, Admin
-- **Fonctionnalités** :
-  - Liste des équipes avec filtres
-  - Création/modification d'équipe
-  - Affectation des membres
-  - Upload logo équipe
-
-#### `/epreuves` - Configuration épreuves
-- **Rôle** : Admin, Gestionnaire
-- **Fonctionnalités** :
-  - Définition des épreuves
-  - Barèmes et coefficients
-  - Critères d'évaluation
-
-#### `/resultats/saisie` - Saisie des notes
-- **Rôle** : Secrétaire, Jury
-- **Fonctionnalités** :
-  - Interface de saisie rapide
-  - Validation en temps réel
-  - Historique des modifications
-
-#### `/classements` - Résultats et classements
-- **Rôle** : Public
-- **Fonctionnalités** :
-  - Classement général
-  - Classement par catégorie (Esthétique, Site web)
-  - Meilleure équipe par collège
-  - Export CSV/XLS/ODS
-
+### Page géré
 #### `/admin/roles` - Gestion des rôles
 - **Rôle** : Admin
 - **Fonctionnalités** : CRUD complet sur les rôles
@@ -282,54 +236,8 @@ php artisan make:migration create_table
 php artisan make:seeder NameSeeder
 php artisan make:policy NamePolicy
 ```
-
 ---
 
-## 📦 Dépendances principales
-
-### Backend (Composer)
-```json
-{
-  "laravel/framework": "^10.0",
-  "laravel/sanctum": "^3.0",
-  "laravel/tinker": "^2.8"
-}
-```
-
-### Frontend (NPM)
-```json
-{
-  "vite": "^4.0",
-  "laravel-vite-plugin": "^0.7"
-}
-```
-
----
-
-## 🐛 Dépannage rapide
-
-### Erreur "Class not found"
-```bash
-composer dump-autoload
-```
-
-### Erreur permissions (Linux/Mac)
-```bash
-chmod -R 775 storage bootstrap/cache
-```
-
-### Page blanche / 500
-```bash
-php artisan optimize:clear
-```
-
-### Assets non chargés
-```bash
-npm run build
-php artisan view:clear
-```
-
----
 
 ## 👨‍💻 Développement réalisé (Personnel)
 
@@ -371,5 +279,3 @@ php artisan view:clear
 ## 📞 Support
 
 **Repository** : [github.com/AdrianoSIO/cr_26](https://github.com/AdrianoSIO/cr_26)
-
-**Issues** : Ouvrir un ticket sur GitHub pour tout bug ou suggestion.
