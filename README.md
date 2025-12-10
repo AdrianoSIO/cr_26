@@ -1,475 +1,378 @@
-# 🤖 Concours de Robots – Application de Gestion
+# 🤖 Concours de Robots – Documentation Technique
 
-## 📌 Contexte
+## 📌 Présentation
 
-Ce projet est une application web dédiée à la gestion du concours de robots organisé annuellement entre plusieurs collèges des Deux-Sèvres, dans le cadre de l'enseignement de la technologie. L'objectif principal est de proposer une plateforme moderne, sécurisée et responsive permettant d'administrer entièrement le concours, depuis l'inscription des équipes jusqu'à la publication des résultats finaux.
+Application web de gestion du concours de robots annuel entre collèges des Deux-Sèvres. Plateforme complète pour l'administration du concours, de l'inscription jusqu'aux résultats finaux.
 
-### Identifiants de test
-- **Login** : `Prof@futaie.com`
-- **Mot de passe** : `Prof`
+**Identifiants de test** : `Prof@futaie.com` / `Prof`
 
 ---
 
-## 🚀 Fonctionnalités principales
+## 🚀 Installation rapide
 
-L'application gère tous les aspects du concours :
+### Prérequis (déjà installés)
+- PHP 8.1+
+- Composer
+- Node.js & npm
+- MySQL
+- Git
 
-- ✅ Inscriptions en ligne des équipes par les enseignants
-- ✅ Gestion complète des épreuves avec définition des barèmes et coefficients
-- ✅ Saisie rapide des résultats par les secrétaires
-- ✅ Consultation des résultats en temps réel
-- ✅ Export des données au format CSV, XLS et ODS
-- ✅ Génération automatique des classements :
-  - Classement général
-  - Esthétique
-  - Site web
-  - Meilleure équipe par collège
-- ✅ Accès public aux informations générales
-- ✅ Interface responsive (ordinateur, tablette, mobile)
-
----
-
-## 👤 Travail réalisé personnellement
-
-Je me suis chargé des fonctionnalités CRUD (Créer, Lire, Modifier, Supprimer) pour les tables suivantes :
-
-### Table rôle
-- Création d'un rôle
-- Modification
-- Suppression
-
-### Table pays
-- Création
-- Modification
-- Suppression
-
-### Table genre
-- Création
-- Modification
-- Suppression
-
----
-
-## 🛠️ Technologies utilisées
-
-Le projet repose sur une architecture MVC moderne.
-
-- **Backend** : PHP avec Laravel
-- **Frontend** : Blade, HTML, CSS
-- **Base de données** : MySQL
-- **Outils** : Composer, Node.js, npm
-- **Versionning** : GitHub
-
----
-
-## ⚙️ Installation complète
-
-Cette section explique comment lancer le projet sur un ordinateur ne disposant pas de Laravel, Composer ou configuration préalable.
-
-### 1️⃣ Vérification des prérequis
-
-Avant de commencer, vérifiez si les outils suivants sont installés :
+### Installation en 5 étapes
 
 ```bash
-# PHP
-php -v
-
-# Composer
-composer -V
-
-# Node.js et npm
-node -v
-npm -v
-
-# Git
-git --version
-```
-
----
-
-### 2️⃣ Installation des prérequis manquants
-
-#### 🪟 Installation sur Windows
-
-##### **PHP**
-1. Téléchargez PHP depuis [windows.php.net/download](https://windows.php.net/download/)
-2. Choisissez **Thread Safe** version 8.1 ou supérieure
-3. Extrayez le fichier ZIP dans `C:\php`
-4. Ajoutez `C:\php` au PATH système :
-   - Ouvrez **Panneau de configuration** → **Système** → **Paramètres système avancés**
-   - Cliquez sur **Variables d'environnement**
-   - Dans **Variables système**, sélectionnez **Path** et cliquez sur **Modifier**
-   - Ajoutez `C:\php`
-5. Renommez `php.ini-development` en `php.ini` dans le dossier PHP
-6. Ouvrez `php.ini` et activez les extensions suivantes (retirez le `;` devant) :
-   ```ini
-   extension=fileinfo
-   extension=pdo_mysql
-   extension=mbstring
-   extension=openssl
-   extension=zip
-   extension=curl
-   ```
-7. Vérifiez l'installation : `php -v`
-
-##### **Composer**
-1. Téléchargez l'installateur depuis [getcomposer.org](https://getcomposer.org/Composer-Setup.exe)
-2. Exécutez l'installateur
-3. Suivez les instructions (il détectera automatiquement PHP)
-4. Vérifiez : `composer -V`
-
-##### **Node.js et npm**
-1. Téléchargez l'installateur LTS depuis [nodejs.org](https://nodejs.org)
-2. Exécutez l'installateur et suivez les instructions
-3. Redémarrez votre terminal
-4. Vérifiez :
-   ```bash
-   node -v
-   npm -v
-   ```
-
-##### **Git**
-1. Téléchargez depuis [git-scm.com](https://git-scm.com/download/win)
-2. Exécutez l'installateur avec les options par défaut
-3. Vérifiez : `git --version`
-
-##### **MySQL (Base de données)**
-1. Téléchargez **XAMPP** depuis [apachefriends.org](https://www.apachefriends.org)
-2. Installez XAMPP (cochez MySQL)
-3. Lancez le panneau de contrôle XAMPP
-4. Démarrez **Apache** et **MySQL**
-5. Accédez à phpMyAdmin : [http://localhost/phpmyadmin](http://localhost/phpmyadmin)
-
----
-
-#### 🐧 Installation sur Linux (Ubuntu/Debian)
-
-##### **PHP**
-```bash
-sudo apt update
-sudo apt install php8.1 php8.1-cli php8.1-common php8.1-mysql php8.1-zip php8.1-gd php8.1-mbstring php8.1-curl php8.1-xml php8.1-bcmath
-php -v
-```
-
-##### **Composer**
-```bash
-curl -sS https://getcomposer.org/installer | php
-sudo mv composer.phar /usr/local/bin/composer
-sudo chmod +x /usr/local/bin/composer
-composer -V
-```
-
-##### **Node.js et npm**
-```bash
-curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
-sudo apt install -y nodejs
-node -v
-npm -v
-```
-
-##### **Git**
-```bash
-sudo apt install git
-git --version
-```
-
-##### **MySQL**
-```bash
-sudo apt install mysql-server
-sudo systemctl start mysql
-sudo systemctl enable mysql
-sudo mysql_secure_installation
-```
-
-Créez un utilisateur MySQL :
-```bash
-sudo mysql
-```
-```sql
-CREATE USER 'robot_user'@'localhost' IDENTIFIED BY 'votre_mot_de_passe';
-GRANT ALL PRIVILEGES ON *.* TO 'robot_user'@'localhost';
-FLUSH PRIVILEGES;
-EXIT;
-```
-
----
-
-#### 🍎 Installation sur macOS
-
-##### **Homebrew (gestionnaire de paquets)**
-```bash
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-```
-
-##### **PHP**
-```bash
-brew install php@8.1
-echo 'export PATH="/usr/local/opt/php@8.1/bin:$PATH"' >> ~/.zshrc
-source ~/.zshrc
-php -v
-```
-
-##### **Composer**
-```bash
-brew install composer
-composer -V
-```
-
-##### **Node.js et npm**
-```bash
-brew install node
-node -v
-npm -v
-```
-
-##### **Git**
-```bash
-brew install git
-git --version
-```
-
-##### **MySQL**
-```bash
-brew install mysql
-brew services start mysql
-mysql_secure_installation
-```
-
----
-
-### 3️⃣ Cloner le projet depuis GitHub
-
-```bash
+# 1. Cloner le projet
 git clone https://github.com/AdrianoSIO/cr_26.git
 cd cr_26
-```
 
----
-
-### 4️⃣ Installer les dépendances
-
-#### Backend PHP
-```bash
+# 2. Installer les dépendances
 composer install
-```
-
-#### Frontend
-```bash
 npm install
-```
 
----
-
-### 5️⃣ Configuration de Laravel
-
-#### Copier le fichier d'environnement
-```bash
+# 3. Configuration Laravel
 cp .env.example .env
-```
-
-#### Générer la clé Laravel
-```bash
 php artisan key:generate
-```
 
----
+# 4. Configurer la base de données
+# Éditez .env avec vos paramètres MySQL :
+# DB_DATABASE=robot
+# DB_USERNAME=root
+# DB_PASSWORD=votre_mot_de_passe
 
-### 6️⃣ Configuration de la base de données
+# Créer la base de données
+mysql -u root -p -e "CREATE DATABASE robot;"
 
-#### Option 1 : MySQL (recommandé)
-
-1. Créez la base de données :
-   ```sql
-   CREATE DATABASE robot CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-   ```
-
-2. Modifiez le fichier `.env` :
-   ```env
-   DB_CONNECTION=mysql
-   DB_HOST=127.0.0.1
-   DB_PORT=3306
-   DB_DATABASE=robot
-   DB_USERNAME=root
-   DB_PASSWORD=
-   ```
-
-#### Option 2 : SQLite (plus simple pour débuter)
-
-1. Créez le fichier de base de données :
-   ```bash
-   touch database/database.sqlite
-   ```
-
-2. Modifiez le fichier `.env` :
-   ```env
-   DB_CONNECTION=sqlite
-   DB_DATABASE=/chemin/absolu/cr_26/database/database.sqlite
-   ```
-
----
-
-### 7️⃣ Créer les tables et données de test
-
-```bash
+# 5. Initialiser et lancer
 php artisan migrate --seed
+npm run dev & php artisan serve
 ```
 
-Cette commande crée toutes les tables et insère des données de démonstration.
+🎉 **Accès** : http://127.0.0.1:8000
 
 ---
 
-### 8️⃣ Compiler le frontend
+## 🏗️ Architecture technique
 
-#### Mode développement (avec rechargement automatique)
-```bash
-npm run dev
+### Stack technologique
+- **Backend** : Laravel (PHP)
+- **Frontend** : Blade, HTML, CSS
+- **BDD** : MySQL
+- **Build** : Vite
+- **Versionning** : Git/GitHub
+
+### Structure MVC
+
 ```
+app/
+├── Http/Controllers/     # Logique métier
+├── Models/              # Entités de données
+└── Policies/            # Autorisations
 
-#### Mode production (optimisé)
-```bash
-npm run build
+resources/
+├── views/               # Templates Blade
+└── css/js/              # Assets frontend
+
+database/
+├── migrations/          # Schémas de tables
+└── seeders/            # Données de test
+
+routes/
+└── web.php             # Définition des routes
 ```
 
 ---
 
-### 9️⃣ Démarrer le serveur
+## 📊 Modèle de données
 
-```bash
-php artisan serve
+### Tables principales
+
+#### Utilisateurs et authentification
+- **users** : Comptes utilisateurs
+- **roles** : Rôles système (Admin, Enseignant, Élève...)
+- **genres** : Genres (M/F/Autre)
+- **pays** : Référentiel pays
+
+#### Gestion du concours
+- **colleges** : Établissements participants
+- **equipes** : Équipes de compétition
+- **epreuves** : Épreuves du concours
+- **resultats** : Scores et performances
+- **classements** : Résultats calculés
+
+### Relations clés
+```
+User → Role (1:N)
+Equipe → College (N:1)
+Equipe → User (N:N) [équipe_user]
+Resultat → Equipe (N:1)
+Resultat → Epreuve (N:1)
 ```
 
-🎉 **Accédez à l'application** : [http://127.0.0.1:8000](http://127.0.0.1:8000)
+---
+
+## 🔐 Système d'autorisation
+
+### Rôles et permissions
+
+| Rôle | Accès | Permissions |
+|------|-------|-------------|
+| **Administrateur** | Complet | Gestion totale de la plateforme |
+| **Gestionnaire** | Étendu | Supervision concours et équipes |
+| **Secrétaire** | Modéré | Saisie des résultats |
+| **Jury** | Limité | Évaluation des épreuves |
+| **Enseignant** | Standard | Gestion de ses équipes |
+| **Élève** | Restreint | Consultation de son équipe |
+| **Visiteur** | Public | Consultation résultats publics |
+
+### Middleware d'authentification
+```php
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    // Routes admin uniquement
+});
+```
 
 ---
 
-## 👥 Rôles utilisateurs
+## 🛣️ Routing et navigation
 
-| Rôle | Permissions |
-|------|-------------|
-| **Administrateur** | Tous les droits |
-| **Gestionnaire** | Supervision générale |
-| **Secrétaire** | Saisie des notes |
-| **Jury** | Évaluation des épreuves |
-| **Enseignant** | Gestion des équipes |
-| **Élève** | Participation |
-| **Visiteur** | Consultation publique |
+### Routes publiques
+```
+GET  /                  # Page d'accueil
+GET  /resultats         # Résultats publics
+GET  /classement        # Classements généraux
+```
+
+### Routes authentifiées
+```
+GET  /dashboard         # Tableau de bord
+GET  /equipes           # Gestion équipes
+POST /equipes           # Créer équipe
+GET  /resultats/saisie  # Interface saisie notes
+```
+
+### Routes CRUD (exemple : rôles)
+```
+GET    /roles           # Liste
+GET    /roles/create    # Formulaire création
+POST   /roles           # Enregistrer
+GET    /roles/{id}/edit # Formulaire édition
+PUT    /roles/{id}      # Mettre à jour
+DELETE /roles/{id}      # Supprimer
+```
 
 ---
 
-## 🧰 Commandes utiles
+## 🎨 Interface utilisateur
 
+### Pages principales
+
+#### `/dashboard` - Tableau de bord
+- **Rôle** : Tous (authentifiés)
+- **Affichage** : Statistiques personnalisées selon le rôle
+- **Composants** : Cards de résumé, graphiques, accès rapides
+
+#### `/equipes` - Gestion des équipes
+- **Rôle** : Enseignant, Admin
+- **Fonctionnalités** :
+  - Liste des équipes avec filtres
+  - Création/modification d'équipe
+  - Affectation des membres
+  - Upload logo équipe
+
+#### `/epreuves` - Configuration épreuves
+- **Rôle** : Admin, Gestionnaire
+- **Fonctionnalités** :
+  - Définition des épreuves
+  - Barèmes et coefficients
+  - Critères d'évaluation
+
+#### `/resultats/saisie` - Saisie des notes
+- **Rôle** : Secrétaire, Jury
+- **Fonctionnalités** :
+  - Interface de saisie rapide
+  - Validation en temps réel
+  - Historique des modifications
+
+#### `/classements` - Résultats et classements
+- **Rôle** : Public
+- **Fonctionnalités** :
+  - Classement général
+  - Classement par catégorie (Esthétique, Site web)
+  - Meilleure équipe par collège
+  - Export CSV/XLS/ODS
+
+#### `/admin/roles` - Gestion des rôles
+- **Rôle** : Admin
+- **Fonctionnalités** : CRUD complet sur les rôles
+
+#### `/admin/pays` - Gestion des pays
+- **Rôle** : Admin
+- **Fonctionnalités** : CRUD complet sur le référentiel pays
+
+#### `/admin/genres` - Gestion des genres
+- **Rôle** : Admin
+- **Fonctionnalités** : CRUD complet sur les genres
+
+---
+
+## 💾 Gestion des données
+
+### Migrations
 ```bash
-# Lancer le serveur de développement
-php artisan serve
+# Créer une migration
+php artisan make:migration create_table_name
 
-# Réinitialiser la base de données (⚠️ supprime toutes les données)
+# Exécuter les migrations
+php artisan migrate
+
+# Rollback
+php artisan migrate:rollback
+
+# Reset complet
 php artisan migrate:fresh --seed
+```
 
-# Nettoyer tous les caches Laravel
-php artisan optimize:clear
+### Seeders
+```bash
+# Créer un seeder
+php artisan make:seeder TableNameSeeder
 
-# Voir toutes les routes disponibles
-php artisan route:list
+# Exécuter les seeders
+php artisan db:seed
+php artisan db:seed --class=SpecificSeeder
+```
 
-# Créer un nouveau contrôleur
-php artisan make:controller NomController
+### Exports
+Formats supportés :
+- **CSV** : Export standard
+- **XLS** : Excel classique
+- **ODS** : LibreOffice
 
-# Créer un nouveau modèle avec migration
-php artisan make:model NomModele -m
+---
 
-# Compiler les assets en temps réel (mode watch)
-npm run dev
+## 🔧 Commandes de développement
 
-# Vider le cache de configuration
-php artisan config:clear
+### Serveur
+```bash
+php artisan serve              # Démarrer sur :8000
+php artisan serve --port=8080  # Port personnalisé
+```
 
-# Vider le cache des vues Blade
-php artisan view:clear
+### Cache
+```bash
+php artisan optimize:clear     # Nettoyer tout
+php artisan config:clear       # Config
+php artisan route:clear        # Routes
+php artisan view:clear         # Vues
+```
+
+### Base de données
+```bash
+php artisan migrate:fresh --seed  # Reset + données test
+php artisan db:seed               # Données uniquement
+```
+
+### Assets frontend
+```bash
+npm run dev     # Mode développement (watch)
+npm run build   # Compilation production
+```
+
+### Génération de code
+```bash
+php artisan make:controller NameController
+php artisan make:model Name -m
+php artisan make:migration create_table
+php artisan make:seeder NameSeeder
+php artisan make:policy NamePolicy
 ```
 
 ---
 
-## 🐛 Résolution des problèmes courants
+## 📦 Dépendances principales
 
-### Erreur : "Class not found"
+### Backend (Composer)
+```json
+{
+  "laravel/framework": "^10.0",
+  "laravel/sanctum": "^3.0",
+  "laravel/tinker": "^2.8"
+}
+```
+
+### Frontend (NPM)
+```json
+{
+  "vite": "^4.0",
+  "laravel-vite-plugin": "^0.7"
+}
+```
+
+---
+
+## 🐛 Dépannage rapide
+
+### Erreur "Class not found"
 ```bash
 composer dump-autoload
+```
+
+### Erreur permissions (Linux/Mac)
+```bash
+chmod -R 775 storage bootstrap/cache
+```
+
+### Page blanche / 500
+```bash
 php artisan optimize:clear
 ```
 
-### Erreur : "Permission denied" (Linux/macOS)
+### Assets non chargés
 ```bash
-sudo chmod -R 775 storage bootstrap/cache
-sudo chown -R $USER:www-data storage bootstrap/cache
-```
-
-### Erreur : "npm ERR! code ELIFECYCLE"
-```bash
-rm -rf node_modules package-lock.json
-npm install
-```
-
-### La page ne charge pas / erreur 500
-```bash
-php artisan config:clear
-php artisan cache:clear
-php artisan route:clear
+npm run build
 php artisan view:clear
 ```
 
 ---
 
-## 📁 Structure du projet
+## 👨‍💻 Développement réalisé (Personnel)
 
-```
-cr_26/
-├── app/                    # Code applicatif (Contrôleurs, Modèles)
-├── bootstrap/              # Fichiers de démarrage Laravel
-├── config/                 # Fichiers de configuration
-├── database/               # Migrations et seeders
-├── public/                 # Point d'entrée public (index.php, assets)
-├── resources/              # Vues Blade, CSS, JS
-├── routes/                 # Définition des routes
-├── storage/                # Fichiers générés (logs, cache, uploads)
-├── tests/                  # Tests automatisés
-├── vendor/                 # Dépendances PHP (Composer)
-├── .env                    # Configuration environnement
-├── artisan                 # CLI Laravel
-├── composer.json           # Dépendances PHP
-└── package.json            # Dépendances Node.js
-```
+### Fonctionnalités CRUD implémentées
 
----
+#### Module Rôles (`/admin/roles`)
+- ✅ Liste avec pagination
+- ✅ Création de rôle
+- ✅ Modification
+- ✅ Suppression sécurisée
+- ✅ Validation des données
 
-## 🎯 Objectif pédagogique
+#### Module Pays (`/admin/pays`)
+- ✅ Référentiel complet
+- ✅ CRUD standard
+- ✅ Recherche et filtres
 
-Ce projet a pour but de développer des compétences en :
-- Développement web professionnel
-- Gestion de bases de données relationnelles
-- Travail collaboratif avec Git/GitHub
-- Architecture MVC avec Laravel
-- Authentification et gestion des permissions
-- Interface responsive et UX moderne
+#### Module Genres (`/admin/genres`)
+- ✅ Gestion des genres
+- ✅ CRUD complet
+- ✅ Interface responsive
 
 ---
 
-## 📝 Licence
+## 🎯 Fonctionnalités clés
 
-Ce projet est développé dans un cadre éducatif.
-
----
-
-## 🤝 Contribution
-
-Pour contribuer au projet :
-1. Fork le repository
-2. Créez une branche pour votre fonctionnalité (`git checkout -b feature/nouvelle-fonctionnalite`)
-3. Committez vos changements (`git commit -m 'Ajout nouvelle fonctionnalité'`)
-4. Push vers la branche (`git push origin feature/nouvelle-fonctionnalite`)
-5. Ouvrez une Pull Request
+- ✅ Authentification multi-rôles
+- ✅ Inscription en ligne des équipes
+- ✅ Gestion complète des épreuves
+- ✅ Saisie rapide des résultats
+- ✅ Calcul automatique des classements
+- ✅ Exports multiformats (CSV/XLS/ODS)
+- ✅ Interface responsive
+- ✅ Consultation temps réel
+- ✅ Accès public sécurisé
 
 ---
 
-## 📞 Contact
+## 📞 Support
 
-Pour toute question concernant le projet, contactez l'équipe de développement via GitHub.
+**Repository** : [github.com/AdrianoSIO/cr_26](https://github.com/AdrianoSIO/cr_26)
+
+**Issues** : Ouvrir un ticket sur GitHub pour tout bug ou suggestion.
